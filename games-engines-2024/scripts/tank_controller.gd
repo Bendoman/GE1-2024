@@ -8,8 +8,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+#	Translate tank based on user input
 	var movementAxis = Input.get_axis("move_forward", "move_back")
 	translate(Vector3(0, 0, movementAxis * delta * speed))
 	
+#	Rotates tank based on user input
 	var rotationAxis = Input.get_axis("turn_right", "turn_left")
 	rotate_y(deg_to_rad(turningRotation) * delta * rotationAxis)
