@@ -9,7 +9,7 @@
 
 ## Created wall spawner
 ![image](https://github.com/user-attachments/assets/e0c2ee1e-357c-448e-9536-1cf85111dac3) <br>
-![image](https://github.com/user-attachments/assets/788b3d92-bec7-4b41-9c79-7fa996adec26) <br>
+![image](https://github.com/user-attachments/assets/bcc4f690-977d-4962-904e-d18c67bb6e6c) <br>
 ![image](https://github.com/user-attachments/assets/a20e89d5-1b7d-4695-8b20-210a626b8485) <br>
 
 
