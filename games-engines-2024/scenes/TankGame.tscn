@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://blvpfujhl0ngx"]
+
+[ext_resource type="Material" uid="uid://b7dc1c7ql1n04" path="res://materials/ground.tres" id="1_0n46i"]
+[ext_resource type="Material" uid="uid://cl6tu4rc1rp71" path="res://materials/tank.tres" id="2_qox8n"]
+[ext_resource type="Script" path="res://scenes/tank_controller.gd" id="3_jwirr"]
+[ext_resource type="Material" uid="uid://b808mmr8ky522" path="res://materials/turret.tres" id="4_dhjyg"]
+[ext_resource type="Script" path="res://scenes/turret_controller.gd" id="5_v4mbb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3n0lq"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_my7rm"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="PrismMesh" id="PrismMesh_dsrlm"]
+size = Vector3(1, 0.5, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gai7j"]
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hd087"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.25
+
+[node name="TankGame" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_0n46i")
+mesh = SubResource("PlaneMesh_3n0lq")
+
+[node name="Tank" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("2_qox8n")
+mesh = SubResource("BoxMesh_my7rm")
+script = ExtResource("3_jwirr")
+
+[node name="Back" type="MeshInstance3D" parent="Tank"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 1.25)
+material_override = ExtResource("2_qox8n")
+mesh = SubResource("PrismMesh_dsrlm")
+
+[node name="Front" type="MeshInstance3D" parent="Tank"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, -1.25)
+material_override = ExtResource("2_qox8n")
+mesh = SubResource("PrismMesh_dsrlm")
+skeleton = NodePath("../..")
+
+[node name="Turret" type="MeshInstance3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+material_override = ExtResource("4_dhjyg")
+mesh = SubResource("CylinderMesh_gai7j")
+script = ExtResource("5_v4mbb")
+
+[node name="Gun" type="MeshInstance3D" parent="Tank/Turret"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.1, -1)
+material_override = ExtResource("4_dhjyg")
+mesh = SubResource("CylinderMesh_hd087")
+
+[node name="Camera3D" type="Camera3D" parent="Tank"]
+transform = Transform3D(1, 0, 0, 0, 0.866636, 0.498942, 0, -0.498942, 0.866636, 0, 3.20158, 5.62033)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.802609, 0.21924, 0.554754, -0.351299, -0.57789, 0.736636, 0.482087, -0.786115, -0.386801, 0, 0, 0)
