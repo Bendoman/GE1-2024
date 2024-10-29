@@ -13,8 +13,13 @@ func _ready():
 #			For checkered effect
 			if(row % 2 == 0):
 				pos = Vector3(col * 2 - 1, row * .5, 0)
-
 			brick.position = pos 
+			
+			var m = StandardMaterial3D.new()
+			var h = ((row * col) + col) / (float)(rows * cols)
+			m.albedo_color = Color.from_hsv(h, 1, 1)
+			var mesh:MeshInstance3D = brick.get_node("brick2")
+			mesh.set_surface_override_material(0, m)
 			add_child(brick)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
