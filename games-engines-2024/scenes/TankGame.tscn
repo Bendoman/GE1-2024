@@ -42,7 +42,7 @@ size = Vector2(100, 100)
 [node name="TankGame" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247669, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247669, 7.21514)
 script = ExtResource("3_jwirr")
 
 [node name="Tank" type="MeshInstance3D" parent="Player"]
@@ -75,6 +75,7 @@ material_override = ExtResource("4_dhjyg")
 mesh = SubResource("CylinderMesh_hd087")
 
 [node name="MissileLauncher" type="Node3D" parent="Player/Tank/Turret/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4995, -1.19209e-07)
 script = ExtResource("6_bt67x")
 missile_scene = ExtResource("9_7csjp")
 
@@ -92,6 +93,9 @@ shape = SubResource("ConvexPolygonShape3D_0ymwt")
 
 [node name="CameraTarget" type="Marker3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52838, 7.23588)
+
+[node name="Marker3D" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2421, -1.92086)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.802609, 0.21924, 0.554754, -0.351299, -0.57789, 0.736636, 0.482087, -0.786115, -0.386801, 0, 0, 0)

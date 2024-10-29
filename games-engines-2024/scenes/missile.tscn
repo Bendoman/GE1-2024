@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfwyhllk1eocp"]
+[gd_scene load_steps=11 format=3 uid="uid://bfwyhllk1eocp"]
 
 [ext_resource type="Material" uid="uid://bo576a4aqbxot" path="res://materials/missile_base.tres" id="1_mo1he"]
 [ext_resource type="Script" path="res://scenes/missile_body.gd" id="2_l5ptk"]
@@ -30,14 +30,18 @@ top_radius = 0.08
 bottom_radius = 0.09
 height = 0.1
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xcc4o"]
+radius = 0.332
+height = 1.12342
+
+[node name="Node3D" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("2_l5ptk")
 
 [node name="missile_body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("1_mo1he")
 mesh = SubResource("CylinderMesh_gvklf")
-script = ExtResource("2_l5ptk")
 
 [node name="nose" type="MeshInstance3D" parent="missile_body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.416926, -1.82244e-08)
@@ -74,3 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.358906, -1.56883e-08)
 material_override = ExtResource("2_v0epa")
 mesh = SubResource("CylinderMesh_a3f6j")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_xcc4o")

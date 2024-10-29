@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends CharacterBody3D
 
 @export var speed:int = 90
 var time_elapsed:float = 0
@@ -8,8 +8,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	translate(Vector3(0, speed * delta, 0))
+func _physics_process(delta: float) -> void:
+	translate(Vector3(0, 0, speed * delta))
 
 	time_elapsed += delta
 	if time_elapsed > 1.0:
