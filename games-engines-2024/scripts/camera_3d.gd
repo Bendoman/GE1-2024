@@ -1,11 +1,14 @@
 extends Camera3D
 
-
+@export var target:Node3D
+@export var player:Node3D
+#
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-
+#
+#
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	global_position = lerp(global_position, target.global_position, delta)
+	look_at(player.global_position)

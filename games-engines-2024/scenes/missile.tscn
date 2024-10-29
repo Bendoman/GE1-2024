@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1t5gywort80y"]
+[gd_scene load_steps=10 format=3 uid="uid://bfwyhllk1eocp"]
 
 [ext_resource type="Material" uid="uid://bo576a4aqbxot" path="res://materials/missile_base.tres" id="1_mo1he"]
 [ext_resource type="Script" path="res://scenes/missile_body.gd" id="2_l5ptk"]

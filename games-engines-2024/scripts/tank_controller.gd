@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var speed = 40
+@export var speed = 20
 @export var turningRotation = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,4 +21,12 @@ func _physics_process(delta):
 	var rotationAxis = Input.get_axis("turn_right", "turn_left")
 	rotate_y(deg_to_rad(turningRotation) * delta * rotationAxis)
 	
+	DebugDraw2D.set_text("position", position)
+	DebugDraw2D.set_text("global_position", global_position)
+	DebugDraw2D.set_text("basis.x", transform.basis.x)
+	DebugDraw2D.set_text("basis.y", transform.basis.y)
+	DebugDraw2D.set_text("basis.z", transform.basis.x)
+	DebugDraw2D.set_text("global basis.x", global_transform.basis.x)
+	DebugDraw2D.set_text("global basis.y", global_transform.basis.y)
+	DebugDraw2D.set_text("global basis.z", global_transform.basis.x)
 	

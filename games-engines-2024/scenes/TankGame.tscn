@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scenes/missile_launcher.gd" id="6_bt67x"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="6_gf6gk"]
 [ext_resource type="PackedScene" uid="uid://dv7roxvuh84bm" path="res://scenes/brick.tscn" id="7_3dm0w"]
-[ext_resource type="PackedScene" path="res://scenes/missile.tscn" id="9_7csjp"]
+[ext_resource type="PackedScene" uid="uid://bfwyhllk1eocp" path="res://scenes/missile.tscn" id="9_7csjp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_my7rm"]
 size = Vector3(2, 1, 2)
@@ -41,57 +41,57 @@ size = Vector2(100, 100)
 
 [node name="TankGame" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247669, 0)
 script = ExtResource("3_jwirr")
 
-[node name="Tank" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="Tank" type="MeshInstance3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = ExtResource("2_qox8n")
 mesh = SubResource("BoxMesh_my7rm")
 skeleton = NodePath("../..")
 
-[node name="Back" type="MeshInstance3D" parent="CharacterBody3D/Tank"]
+[node name="Back" type="MeshInstance3D" parent="Player/Tank"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 1.25)
 material_override = ExtResource("2_qox8n")
 mesh = SubResource("PrismMesh_dsrlm")
 
-[node name="Front" type="MeshInstance3D" parent="CharacterBody3D/Tank"]
+[node name="Front" type="MeshInstance3D" parent="Player/Tank"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, -1.25)
 material_override = ExtResource("2_qox8n")
 mesh = SubResource("PrismMesh_dsrlm")
 skeleton = NodePath("../../..")
 
-[node name="Turret" type="MeshInstance3D" parent="CharacterBody3D/Tank"]
+[node name="Turret" type="MeshInstance3D" parent="Player/Tank"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 material_override = ExtResource("4_dhjyg")
 mesh = SubResource("CylinderMesh_gai7j")
 script = ExtResource("5_v4mbb")
 turretRotation = 120
 
-[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Tank/Turret"]
+[node name="Gun" type="MeshInstance3D" parent="Player/Tank/Turret"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.1, -1)
 material_override = ExtResource("4_dhjyg")
 mesh = SubResource("CylinderMesh_hd087")
 
-[node name="MissileLauncher" type="Node3D" parent="CharacterBody3D/Tank/Turret/Gun"]
+[node name="MissileLauncher" type="Node3D" parent="Player/Tank/Turret/Gun"]
 script = ExtResource("6_bt67x")
 missile_scene = ExtResource("9_7csjp")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Tank"]
-transform = Transform3D(1, 0, 0, 0, 0.866636, 0.498942, 0, -0.498942, 0.866636, 0, 3.20158, 5.62033)
-script = ExtResource("6_gf6gk")
-
-[node name="BodyCollisionShape" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="BodyCollisionShape" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConvexPolygonShape3D_bf0sk")
 
-[node name="BackCollisionShape" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="BackCollisionShape" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0.5, 1.25)
 shape = SubResource("ConvexPolygonShape3D_jlsmi")
 
-[node name="FrontCollisionShape" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="FrontCollisionShape" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0.5, -1.25)
 shape = SubResource("ConvexPolygonShape3D_0ymwt")
+
+[node name="CameraTarget" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52838, 7.23588)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.802609, 0.21924, 0.554754, -0.351299, -0.57789, 0.736636, 0.482087, -0.786115, -0.386801, 0, 0, 0)
@@ -109,3 +109,9 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground body"]
 shape = SubResource("WorldBoundaryShape3D_fypoc")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target", "player")]
+transform = Transform3D(1, 0, 0, 0, 0.866636, 0.498942, 0, -0.498942, 0.866636, 0, 3.70158, 5.62033)
+script = ExtResource("6_gf6gk")
+target = NodePath("../Player/CameraTarget")
+player = NodePath("../Player")
