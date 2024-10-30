@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://t3b47lj1rvy7"]
+
+[ext_resource type="Material" uid="uid://b07eckk5yq7eb" path="res://materials/cublet_background.tres" id="1_t632o"]
+[ext_resource type="Script" path="res://cublet.gd" id="2_p3tth"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cowcn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dq3u6"]
+size = Vector2(0.9, 0.9)
+
+[node name="Cubelet" type="Node3D"]
+script = ExtResource("2_p3tth")
+
+[node name="cublet_body" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_t632o")
+mesh = SubResource("BoxMesh_cowcn")
+
+[node name="top_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.501, 0)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")
+
+[node name="bottom_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.501, 0)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")
+
+[node name="front_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.501)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")
+
+[node name="back_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, -0.501)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")
+
+[node name="left_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.501, 0, 0)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")
+
+[node name="right_face" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.501, 0, 0)
+mesh = SubResource("PlaneMesh_dq3u6")
+skeleton = NodePath("../cublet_body")

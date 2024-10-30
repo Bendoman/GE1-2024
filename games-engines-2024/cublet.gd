@@ -1,14 +1,15 @@
-extends Camera3D
+extends Node3D
 
-@export var target:Node3D
-@export var player:Node3D
-#
+@export var face_material:StandardMaterial3D = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for child in get_children():
+		if(child.name != "cublet_body"):
+			child.set_surface_override_material(0, face_material)
 	pass # Replace with function body.
-#
-#
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	global_position = lerp(global_position, target.global_position, delta)
-	look_at(player.global_position)
+	pass
