@@ -5,7 +5,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for child in get_children():
-		if(child.name != "cublet_body"):
+		if("face" in child.name):
 			child.set_surface_override_material(0, face_material)
 	pass # Replace with function body.
 
