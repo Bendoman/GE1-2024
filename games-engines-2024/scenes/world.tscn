@@ -9,9 +9,6 @@
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Cubelet" parent="." instance=ExtResource("1_r78ou")]
-face_material = ExtResource("2_1co1v")
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.83455, 0.550932, 0, -0.550932, 0.83455, 0, 2.77785, 4.34893)
 
@@ -31,3 +28,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="top_horizontal_plane" parent="rotation_planes" instance=ExtResource("3_wkby6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="cublets" type="Node3D" parent="."]
+
+[node name="Cubelet" parent="cublets" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.721346)
+face_material = ExtResource("2_1co1v")
