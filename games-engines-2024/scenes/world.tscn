@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0m0jj5cxlrjs"]
+[gd_scene load_steps=9 format=3 uid="uid://c0m0jj5cxlrjs"]
 
+[ext_resource type="Script" path="res://scenes/camera_3d.gd" id="1_bar7a"]
 [ext_resource type="PackedScene" uid="uid://t3b47lj1rvy7" path="res://scenes/cubelet.tscn" id="1_r78ou"]
 [ext_resource type="Script" path="res://scenes/rotation_planes.gd" id="3_ee6f8"]
 [ext_resource type="PackedScene" uid="uid://coqqhipqy4wno" path="res://scenes/rotation_plane.tscn" id="3_wkby6"]
 [ext_resource type="Material" uid="uid://dw8skocq4f01f" path="res://materials/rotation_plane.tres" id="4_yeqn5"]
 [ext_resource type="Material" uid="uid://dpe6ojv76rv0d" path="res://materials/rotation_plane_highlighted.tres" id="5_031w8"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="SphereMesh" id="SphereMesh_ffove"]
+radius = 6.182
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999989, -0.0025962, 0.00393274, 0.000580325, 0.896045, 0.443964, -0.00467653, -0.443956, 0.896036, 0.993628, 2.77785, 4.78344)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxjwt"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
@@ -49,10 +54,101 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114
 
 [node name="cublets" type="Node3D" parent="."]
 
-[node name="Cubelet" parent="cublets" instance=ExtResource("1_r78ou")]
+[node name="Bottom row" type="Node3D" parent="cublets"]
+
+[node name="Cubelet" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
 
-[node name="Cubelet2" parent="cublets" instance=ExtResource("1_r78ou")]
+[node name="Cubelet2" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
 
-[node name="Cubelet3" parent="cublets" instance=ExtResource("1_r78ou")]
+[node name="Cubelet3" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Bottom row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="Middle row" type="Node3D" parent="cublets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+
+[node name="Cubelet" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Cubelet2" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+
+[node name="Cubelet3" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Middle row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="Top row" type="Node3D" parent="cublets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="Cubelet" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Cubelet2" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+
+[node name="Cubelet3" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Top row" instance=ExtResource("1_r78ou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="CameraContainer" type="Node3D" parent="."]
+transform = Transform3D(0.999992, 0, -0.00389207, 0, 1, 0, 0.00389207, 0, 0.999992, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+mesh = SubResource("SphereMesh_ffove")
+surface_material_override/0 = SubResource("StandardMaterial3D_hxjwt")
+
+[node name="Camera3D" type="Camera3D" parent="CameraContainer/MeshInstance3D"]
+transform = Transform3D(0.999989, -0.0025962, 0.00393274, 0.000580326, 0.896045, 0.443964, -0.00467653, -0.443956, 0.896036, -0.0109878, 3.55749, 4.22691)
+script = ExtResource("1_bar7a")
+translationSpeed = 20
