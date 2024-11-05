@@ -1,18 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://t3b47lj1rvy7"]
 
 [ext_resource type="Material" uid="uid://b07eckk5yq7eb" path="res://materials/cublet_background.tres" id="1_t632o"]
-[ext_resource type="Script" path="res://cublet.gd" id="2_p3tth"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cowcn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ppcn1"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_xe61p"]
+
 [node name="Cubelet" type="CharacterBody3D"]
-script = ExtResource("2_p3tth")
 
 [node name="cublet_body" type="MeshInstance3D" parent="."]
+visible = false
 material_override = ExtResource("1_t632o")
 mesh = SubResource("BoxMesh_cowcn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ppcn1")
+
+[node name="body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xe61p")

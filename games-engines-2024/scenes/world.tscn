@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0m0jj5cxlrjs"]
+[gd_scene load_steps=13 format=3 uid="uid://c0m0jj5cxlrjs"]
 
 [ext_resource type="Script" path="res://scenes/camera_3d.gd" id="1_bar7a"]
 [ext_resource type="PackedScene" uid="uid://t3b47lj1rvy7" path="res://scenes/cubelet.tscn" id="1_r78ou"]
+[ext_resource type="Material" uid="uid://dyt20tqm5x44a" path="res://materials/blue_face.tres" id="2_1co1v"]
 [ext_resource type="Script" path="res://scenes/rotation_planes.gd" id="3_ee6f8"]
 [ext_resource type="PackedScene" uid="uid://coqqhipqy4wno" path="res://scenes/rotation_plane.tscn" id="3_wkby6"]
 [ext_resource type="Material" uid="uid://dw8skocq4f01f" path="res://materials/rotation_plane.tres" id="4_yeqn5"]
+[ext_resource type="Script" path="res://scenes/cublets.gd" id="5_5uuvp"]
 [ext_resource type="Material" uid="uid://dpe6ojv76rv0d" path="res://materials/rotation_plane_highlighted.tres" id="5_031w8"]
+[ext_resource type="Material" uid="uid://ih1ruj8tg1fj" path="res://materials/green_face.tres" id="7_o37kx"]
+[ext_resource type="Material" uid="uid://0ajl5h4h5pbk" path="res://materials/orange_face.tres" id="8_mcnht"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ffove"]
 radius = 6.182
@@ -53,6 +57,10 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 1.05, 1.05, -2.1)
 
 [node name="cublets" type="Node3D" parent="."]
+script = ExtResource("5_5uuvp")
+material = ExtResource("2_1co1v")
+material2 = ExtResource("7_o37kx")
+material3 = ExtResource("8_mcnht")
 
 [node name="Bottom row" type="Node3D" parent="cublets"]
 
@@ -152,3 +160,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_hxjwt")
 transform = Transform3D(0.999989, -0.0025962, 0.00393274, 0.000580326, 0.896045, 0.443964, -0.00467653, -0.443956, 0.896036, -0.0109878, 3.55749, 4.22691)
 script = ExtResource("1_bar7a")
 translationSpeed = 20
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0371667, -0.999309, 0, 0.999309, 0.0371667, 0, 0, -1.61324)
