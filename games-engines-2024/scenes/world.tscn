@@ -157,7 +157,7 @@ mesh = SubResource("SphereMesh_ffove")
 surface_material_override/0 = SubResource("StandardMaterial3D_hxjwt")
 
 [node name="Camera3D" type="Camera3D" parent="CameraContainer/MeshInstance3D"]
-transform = Transform3D(0.999989, -0.0025962, 0.00393274, 0.000580326, 0.896045, 0.443964, -0.00467653, -0.443956, 0.896036, -0.0109878, 3.55749, 4.22691)
+transform = Transform3D(0.999989, -0.0025962, 0.00393274, 0.000580326, 0.896045, 0.443963, -0.00467653, -0.443956, 0.896037, -0.0109879, 3.62292, 4.22691)
 script = ExtResource("1_bar7a")
 translationSpeed = 20
 
