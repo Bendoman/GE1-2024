@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddwuorcd152w3"]
+
+[ext_resource type="Script" path="res://csg_cylinder_3d.gd" id="1_7s7pn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lobyb"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ffkn3"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_lobyb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_ffkn3")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 190, 0)
+size = Vector3(1, 380, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13822, 380, 0.0619297)
+height = 0.1
+script = ExtResource("1_7s7pn")
+
+[node name="Camera3D" type="Camera3D" parent="CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0368135, 2.24396, 16.5922)
