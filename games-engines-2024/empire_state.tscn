@@ -1,30 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddwuorcd152w3"]
+[gd_scene load_steps=11 format=3 uid="uid://ddwuorcd152w3"]
 
 [ext_resource type="Script" path="res://csg_cylinder_3d.gd" id="1_7s7pn"]
+[ext_resource type="Material" uid="uid://r5uu0m6nnwww" path="res://ground.tres" id="1_acl28"]
+[ext_resource type="Script" path="res://godot_physics_coin.gd" id="3_fwwpv"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lobyb"]
 size = Vector2(100, 100)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ffkn3"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kl4tk"]
+sky_top_color = Color(0.299621, 0.705292, 0.785124, 1)
+sky_horizon_color = Color(0.880165, 0.731798, 0.457448, 1)
+sky_curve = 0.130583
+ground_bottom_color = Color(0.321569, 0.321569, 0.341176, 1)
+ground_horizon_color = Color(0.323495, 0.323495, 0.323495, 1)
+ground_curve = 0.15455
+
+[sub_resource type="Sky" id="Sky_7dmtv"]
+sky_material = SubResource("ProceduralSkyMaterial_kl4tk")
+
+[sub_resource type="Environment" id="Environment_o7it8"]
+background_mode = 2
+sky = SubResource("Sky_7dmtv")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x4v1d"]
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gn53u"]
+height = 0.1
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+material_override = ExtResource("1_acl28")
 mesh = SubResource("PlaneMesh_lobyb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("WorldBoundaryShape3D_ffkn3")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="building" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 190, 0)
 size = Vector3(1, 380, 1)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="customPhyicsCoin" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13822, 380, 0.0619297)
 height = 0.1
 script = ExtResource("1_7s7pn")
 
-[node name="Camera3D" type="Camera3D" parent="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0368135, 2.24396, 16.5922)
+[node name="Camera3D" type="Camera3D" parent="customPhyicsCoin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0368136, 2.24396, 16.5922)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.305463, 0.588289, -0.748738, 0, 0.786321, 0.617818, 0.952204, -0.18872, 0.240192, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o7it8")
+
+[node name="godotPhysicsCoin" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1729, 380, 0)
+gravity_scale = 0.0
+constant_force = Vector3(0, -9.8, 0)
+script = ExtResource("3_fwwpv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="godotPhysicsCoin"]
+mesh = SubResource("CylinderMesh_x4v1d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="godotPhysicsCoin"]
+shape = SubResource("CylinderShape3D_gn53u")

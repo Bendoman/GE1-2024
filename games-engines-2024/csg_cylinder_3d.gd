@@ -11,12 +11,14 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
+var printed = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	if global_position.y > 0:
 		time += delta
 		velocity += gravity * delta
 		global_position += velocity * delta
-			
-	pass
+	elif not printed:
+		print('Custom physics:\nTime: ', time, '\nVelocity: ', velocity)
+		printed = true
+		
