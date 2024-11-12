@@ -9,6 +9,6 @@ The custom physics node falls at the correct rate. But the rigid body falls more
 This deviation from correct physics appears to be because godot applies a linear damp to falling objects. <br>
 ![image](https://github.com/user-attachments/assets/4e4490e6-a6c6-4cb6-96d2-efdfeef5d24f)
 
-Setting this to 0 resolves the majority of the disparity. The custom physics node is still very slightly more accurate as shown below.
+Setting this to 0 resolves the majority of the disparity. The custom physics node is still very slightly more accurate as shown below. <br>
 ![image](https://github.com/user-attachments/assets/37f43091-3b17-4087-81cf-77037a7ec319)
 
