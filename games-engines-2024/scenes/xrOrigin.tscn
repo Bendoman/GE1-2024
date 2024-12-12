@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dw7f1yfv67ywx"]
 
-[ext_resource type="PackedScene" uid="uid://bdwmserhqai5h" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_hand_low.tscn" id="1_ujrh4"]
-[ext_resource type="Material" uid="uid://bi4l5dbon3ial" path="res://materials/hand_colour.tres" id="2_3kk15"]
-[ext_resource type="PackedScene" uid="uid://bkdeegb8w3oah" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_fullglove_low.tscn" id="2_v0gk8"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_3nymp"]
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="3_47ht7"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_hrrq6"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_2wrea"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="5_l08a2"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_usf4a"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="7_d28vd"]
 
@@ -15,20 +15,22 @@
 [node name="left_hand" type="XRController3D" parent="."]
 tracker = &"left_hand"
 
-[node name="LeftPhysicsHand" parent="left_hand" instance=ExtResource("1_ujrh4")]
-hand_material_override = ExtResource("2_3kk15")
-
 [node name="MovementDirect" parent="left_hand" instance=ExtResource("3_3nymp")]
 strafe = true
+
+[node name="FunctionPickup" parent="left_hand" instance=ExtResource("4_hrrq6")]
+
+[node name="LeftHand" parent="left_hand" instance=ExtResource("3_47ht7")]
 
 [node name="right_hand" type="XRController3D" parent="."]
 tracker = &"right_hand"
 
-[node name="RightPhysicsHand" parent="right_hand" instance=ExtResource("2_v0gk8")]
-hand_material_override = ExtResource("2_3kk15")
-
 [node name="MovementTurn" parent="right_hand" instance=ExtResource("5_2wrea")]
 step_turn_angle = 45.0
+
+[node name="FunctionPickup" parent="right_hand" instance=ExtResource("4_hrrq6")]
+
+[node name="RightHand" parent="right_hand" instance=ExtResource("5_l08a2")]
 
 [node name="PlayerBody" type="CharacterBody3D" parent="." groups=["player_body"] instance=ExtResource("6_usf4a")]
 process_priority = -100

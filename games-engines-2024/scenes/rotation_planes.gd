@@ -14,7 +14,7 @@ var vertical_planes = ['bottom_vertical_plane', 'middle_vertical_plane', 'top_ve
 var face_plane_index = 0
 var face_planes = ['bottom_face_plane', 'middle_face_plane', 'top_face_plane']
 
-var highlighted_plan_type = 'HORIZONTAL'
+var highlighted_plane_type = 'HORIZONTAL'
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,6 +37,8 @@ func swap_highlighted_plane(planes_array, index):
 	var rotationArea:Area3D = highlighted_plane.get_node('RotationArea')
 	
 	for node in rotationArea.get_overlapping_bodies():
+		if('Cubelet' not in node.name):
+			continue
 		print(node)
 		var old_rotation = node.global_rotation
 		var old_position = node.global_position
@@ -52,42 +54,42 @@ func _input(event):
 		if(horizontal_plane_index < 0):
 			horizontal_plane_index = len(horizontal_planes) - 1
 		swap_highlighted_plane(horizontal_planes, horizontal_plane_index)
-		highlighted_plan_type = 'HORIZONTAL'
+		highlighted_plane_type = 'HORIZONTAL'
 
 	if(Input.is_action_just_pressed("up")):
 		horizontal_plane_index += 1
 		if(horizontal_plane_index > len(horizontal_planes) - 1):
 			horizontal_plane_index = 0	
 		swap_highlighted_plane(horizontal_planes, horizontal_plane_index)
-		highlighted_plan_type = 'HORIZONTAL'
+		highlighted_plane_type = 'HORIZONTAL'
 		
 	if(Input.is_action_just_pressed("left")):
 		vertical_plane_index -= 1
 		if(vertical_plane_index < 0):
 			vertical_plane_index = len(vertical_planes) - 1
 		swap_highlighted_plane(vertical_planes, vertical_plane_index)
-		highlighted_plan_type = 'VERTICAL'
+		highlighted_plane_type = 'VERTICAL'
 
 	if(Input.is_action_just_pressed("right")):
 		vertical_plane_index += 1
 		if(vertical_plane_index > len(vertical_planes) - 1):
 			vertical_plane_index = 0	
 		swap_highlighted_plane(vertical_planes, vertical_plane_index)
-		highlighted_plan_type = 'VERTICAL'
+		highlighted_plane_type = 'VERTICAL'
 
 	if(Input.is_action_just_pressed("in")):
 		face_plane_index += 1
 		if(face_plane_index > len(face_planes) - 1):
 			face_plane_index = 0	
 		swap_highlighted_plane(face_planes, face_plane_index)
-		highlighted_plan_type = 'FACE'
+		highlighted_plane_type = 'FACE'
 		
 	if(Input.is_action_just_pressed("out")):
 		face_plane_index -= 1
 		if(face_plane_index < 0):
 			face_plane_index = len(face_planes) - 1
 		swap_highlighted_plane(face_planes, face_plane_index)
-		highlighted_plan_type = 'FACE'
+		highlighted_plane_type = 'FACE'
 		
 		
 	if(Input.is_action_just_pressed("turn_clockwise")):
@@ -100,15 +102,17 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#highlighted_plane.rotate_y(0.1 * delta)
+	#print(highlighted_plane.global_basis)
 	pass
 
 func tween_rotation(deg):
 	var tween = create_tween()
 	var rotation_amount
 	
-	if(highlighted_plan_type == 'HORIZONTAL'):
+	if(highlighted_plane_type == 'HORIZONTAL'):
 		rotation_amount = Vector3(0, deg, 0)
-	elif(highlighted_plan_type == 'VERTICAL' or highlighted_plan_type == 'FACE'):
+	elif(highlighted_plane_type == 'VERTICAL' or highlighted_plane_type == 'FACE'):
 		rotation_amount = Vector3(deg, 0, 0)
 	
 	tweening = true

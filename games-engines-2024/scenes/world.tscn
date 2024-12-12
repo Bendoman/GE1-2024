@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0m0jj5cxlrjs"]
+[gd_scene load_steps=13 format=3 uid="uid://c0m0jj5cxlrjs"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_mot7s"]
 [ext_resource type="PackedScene" uid="uid://dw7f1yfv67ywx" path="res://scenes/xrOrigin.tscn" id="2_qpxi4"]
 [ext_resource type="PackedScene" uid="uid://csa1e3teul0aj" path="res://scenes/cube.tscn" id="3_8u07a"]
+[ext_resource type="PackedScene" uid="uid://c2i58b3m6fkf0" path="res://testWheel.tscn" id="5_2nn1g"]
+[ext_resource type="Material" uid="uid://dyt20tqm5x44a" path="res://materials/blue_face.tres" id="5_fhv33"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n2cwj"]
 sky_top_color = Color(0.425909, 0.569805, 0.704866, 1)
@@ -25,6 +27,10 @@ size = Vector3(10, 0.1, 10)
 [sub_resource type="BoxMesh" id="BoxMesh_16tix"]
 size = Vector3(10, 0.1, 10)
 
+[sub_resource type="BoxMesh" id="BoxMesh_mt4iv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dn2wk"]
+
 [node name="root" type="Node3D"]
 script = ExtResource("1_mot7s")
 
@@ -46,4 +52,17 @@ mesh = SubResource("BoxMesh_16tix")
 [node name="XROrigin3D" parent="." instance=ExtResource("2_qpxi4")]
 
 [node name="Cube" parent="." instance=ExtResource("3_8u07a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.05332, 1.20966, -1.87151)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.05332, 0.147902, -1.87151)
+
+[node name="Table" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.750379, 0)
+material_override = ExtResource("5_fhv33")
+mesh = SubResource("BoxMesh_mt4iv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D"]
+shape = SubResource("BoxShape3D_dn2wk")
+
+[node name="wheelSmooth" parent="." instance=ExtResource("5_2nn1g")]
+transform = Transform3D(-2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0, 0.5, 0.219439, 1.33735, 0.592327)

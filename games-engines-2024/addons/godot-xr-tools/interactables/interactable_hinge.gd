@@ -17,7 +17,7 @@ extends XRToolsInteractableHandleDriven
 
 ## Signal for hinge moved
 signal hinge_moved(angle)
-
+var angular_velocity : Vector3 = Vector3()
 
 ## Hinge minimum limit
 @export var hinge_limit_min : float = -45.0: set = _set_hinge_limit_min
@@ -37,6 +37,7 @@ signal hinge_moved(angle)
 ## If true, the hinge moves to the default position when releases
 @export var default_on_release : bool = false
 
+var previousBasis
 
 # Hinge values in radians
 @onready var _hinge_limit_min_rad : float = deg_to_rad(hinge_limit_min)
@@ -61,12 +62,13 @@ func _ready():
 		Basis.from_euler(Vector3(_hinge_position_rad, 0, 0)),
 		Vector3.ZERO
 	)
-
+	previousBasis = transform.basis
+	
 	# Connect signals
 	if released.connect(_on_hinge_released):
 		push_error("Cannot connect hinge released signal")
 
-
+var previousOffset = 0 
 # Called every frame when one or more handles are held by the player
 func _process(_delta: float) -> void:
 	# Get the total handle angular offsets
@@ -81,12 +83,12 @@ func _process(_delta: float) -> void:
 
 	# Average the angular offsets
 	var offset := offset_sum / grabbed_handles.size()
-
+	
 	# Move the hinge by the requested offset
 	move_hinge(_hinge_position_rad + offset)
 
+	previousOffset = offset
 
-# Move the hinge to the specified position
 func move_hinge(position: float) -> void:
 	# Do the hinge move
 	position = _do_move_hinge(position)
@@ -138,7 +140,6 @@ func _set_default_position(value: float) -> void:
 	default_position = value
 	_default_position_rad = deg_to_rad(value)
 
-
 # Do the hinge move
 func _do_move_hinge(position: float) -> float:
 	# Apply hinge step-quantization
@@ -146,11 +147,21 @@ func _do_move_hinge(position: float) -> float:
 		position = round(position / _hinge_steps_rad) * _hinge_steps_rad
 
 	# Apply hinge limits
-	position = clamp(position, _hinge_limit_min_rad, _hinge_limit_max_rad)
+	#position = clamp(position, _hinge_limit_min_rad, _hinge_limit_max_rad)
 
 	# Move if necessary
 	if position != _hinge_position_rad:
 		transform.basis = Basis.from_euler(Vector3(position, 0.0, 0.0))
-
 	# Return the updated position
 	return position
+
+func _physics_process(delta: float) -> void:
+	if(grabbed_handles.size() == 0):
+		move_hinge(_hinge_position_rad + previousOffset)
+		if(previousOffset < 0):
+			previousOffset += abs(previousOffset) / 50
+		elif(previousOffset > 0):
+			previousOffset -= abs(previousOffset) / 50
+		if(abs(0 - previousOffset) <= 0.001):
+			previousOffset = 0
+		
