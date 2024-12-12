@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw7f1yfv67ywx"]
+
+[ext_resource type="PackedScene" uid="uid://bdwmserhqai5h" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_physics_hand_low.tscn" id="1_ujrh4"]
+[ext_resource type="Material" uid="uid://bi4l5dbon3ial" path="res://materials/hand_colour.tres" id="2_3kk15"]
+[ext_resource type="PackedScene" uid="uid://bkdeegb8w3oah" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_physics_fullglove_low.tscn" id="2_v0gk8"]
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="left_hand" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="LeftPhysicsHand" parent="left_hand" instance=ExtResource("1_ujrh4")]
+hand_material_override = ExtResource("2_3kk15")
+
+[node name="right_hand" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="RightPhysicsHand" parent="right_hand" instance=ExtResource("2_v0gk8")]
+hand_material_override = ExtResource("2_3kk15")
