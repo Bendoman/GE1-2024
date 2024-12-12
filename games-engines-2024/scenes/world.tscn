@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0m0jj5cxlrjs"]
+[gd_scene load_steps=9 format=3 uid="uid://c0m0jj5cxlrjs"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_mot7s"]
 [ext_resource type="PackedScene" uid="uid://dw7f1yfv67ywx" path="res://scenes/xrOrigin.tscn" id="2_qpxi4"]
+[ext_resource type="PackedScene" uid="uid://csa1e3teul0aj" path="res://scenes/cube.tscn" id="3_8u07a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n2cwj"]
 sky_top_color = Color(0.425909, 0.569805, 0.704866, 1)
@@ -42,4 +43,7 @@ shape = SubResource("BoxShape3D_fuouj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
 mesh = SubResource("BoxMesh_16tix")
 
-[node name="XROrigin3D" parent="StaticBody3D/CollisionShape3D" instance=ExtResource("2_qpxi4")]
+[node name="XROrigin3D" parent="." instance=ExtResource("2_qpxi4")]
+
+[node name="Cube" parent="." instance=ExtResource("3_8u07a")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.05332, 1.20966, -1.87151)
