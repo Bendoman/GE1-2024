@@ -8,7 +8,7 @@ var materials = [material, material2, material3]
 func _ready():
 	for node in get_children():
 		for cublet in node.get_children():
-			print(cublet.get_child(0))
+			#print(cublet.get_child(0))
 			
 			if('Top' in node.name):
 				cublet.get_child(2).set_surface_override_material(0, material)

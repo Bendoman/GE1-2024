@@ -2,6 +2,10 @@
 class_name XRToolsInteractableHinge
 extends XRToolsInteractableHandleDriven
 
+signal onSelectSignal
+signal onDeselectSignal
+
+var selected: bool = false
 
 ## XR Tools Interactable Hinge script
 ##
@@ -51,7 +55,6 @@ var previousBasis
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsInteractableHinge" or super(name)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# In Godot 4 we must now manually call our super class ready function
@@ -67,10 +70,24 @@ func _ready():
 	# Connect signals
 	if released.connect(_on_hinge_released):
 		push_error("Cannot connect hinge released signal")
+	connect('onSelectSignal', self.onSelect)
+	connect('onDeselectSignal', self.onDeselect)
 
+func onSelect():
+	print('selected')
+	selected = true
+func onDeselect():
+	print('deselcted')
+	selected = false
+	
 var previousOffset = 0 
 # Called every frame when one or more handles are held by the player
 func _process(_delta: float) -> void:
+
+
+	if not selected:
+		return
+	
 	# Get the total handle angular offsets
 	var offset_sum := 0.0
 	for item in grabbed_handles:
@@ -101,7 +118,6 @@ func move_hinge(position: float) -> void:
 
 	# Emit the moved signal
 	emit_signal("hinge_moved", hinge_position)
-
 
 # Handle release of hinge
 func _on_hinge_released(_interactable: XRToolsInteractableHinge):
@@ -159,9 +175,9 @@ func _physics_process(delta: float) -> void:
 	if(grabbed_handles.size() == 0):
 		move_hinge(_hinge_position_rad + previousOffset)
 		if(previousOffset < 0):
-			previousOffset += abs(previousOffset) / 50
+			previousOffset += abs(previousOffset) / 100
 		elif(previousOffset > 0):
-			previousOffset -= abs(previousOffset) / 50
+			previousOffset -= abs(previousOffset) / 100
 		if(abs(0 - previousOffset) <= 0.001):
 			previousOffset = 0
 		

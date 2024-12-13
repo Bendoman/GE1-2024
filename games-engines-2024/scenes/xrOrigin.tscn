@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw7f1yfv67ywx"]
+[gd_scene load_steps=7 format=3 uid="uid://dw7f1yfv67ywx"]
 
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_3nymp"]
 [ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="3_47ht7"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_2wrea"]
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="5_l08a2"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_usf4a"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="7_d28vd"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -32,10 +31,4 @@ step_turn_angle = 45.0
 
 [node name="RightHand" parent="right_hand" instance=ExtResource("5_l08a2")]
 
-[node name="PlayerBody" type="CharacterBody3D" parent="." groups=["player_body"] instance=ExtResource("6_usf4a")]
-process_priority = -100
-process_physics_priority = -100
-top_level = true
-collision_layer = 524288
-collision_mask = 1023
-script = ExtResource("7_d28vd")
+[node name="PlayerBody" parent="." instance=ExtResource("6_usf4a")]

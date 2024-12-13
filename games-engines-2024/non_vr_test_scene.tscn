@@ -45,4 +45,4 @@ mesh = SubResource("BoxMesh_4g11w")
 transform = Transform3D(1, 0, 0, 0, 0.962687, 0.270617, 0, -0.270617, 0.962687, 0, 1.96224, 1.79382)
 
 [node name="Node3D" parent="." instance=ExtResource("1_m2bwr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.677377, 0.564685, -1.28506)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.835173, 0, -10.66)

@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvsrygsjaqq7e"]
+
+[ext_resource type="Script" path="res://interactable_rotation_planes.gd" id="1_k4ukj"]
+[ext_resource type="Script" path="res://scenes/interactable_cube.gd" id="1_np1tr"]
+[ext_resource type="Material" uid="uid://dw8skocq4f01f" path="res://materials/rotation_plane.tres" id="2_te6jk"]
+[ext_resource type="Material" uid="uid://dpe6ojv76rv0d" path="res://materials/rotation_plane_highlighted.tres" id="3_q83r8"]
+[ext_resource type="Script" path="res://scenes/cublets.gd" id="5_mwdhc"]
+[ext_resource type="Material" uid="uid://dyt20tqm5x44a" path="res://materials/blue_face.tres" id="6_5bekk"]
+[ext_resource type="Material" uid="uid://ih1ruj8tg1fj" path="res://materials/green_face.tres" id="7_e54xb"]
+[ext_resource type="Material" uid="uid://0ajl5h4h5pbk" path="res://materials/orange_face.tres" id="8_y4kj5"]
+[ext_resource type="PackedScene" uid="uid://c2i58b3m6fkf0" path="res://interactable_rotation_plane.tscn" id="9_2xpmb"]
+[ext_resource type="PackedScene" uid="uid://t3b47lj1rvy7" path="res://scenes/cubelet.tscn" id="9_sqj7i"]
+
+[node name="interactable_cube" type="Node3D"]
+script = ExtResource("1_np1tr")
+
+[node name="rotation_planes" type="Node3D" parent="."]
+script = ExtResource("1_k4ukj")
+default_material = ExtResource("2_te6jk")
+highlighted_material = ExtResource("3_q83r8")
+
+[node name="bottom_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="middle_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 1.05, -1.05)
+
+[node name="top_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 2.1, -1.05)
+
+[node name="cublets" type="Node3D" parent="."]
+script = ExtResource("5_mwdhc")
+material = ExtResource("6_5bekk")
+material2 = ExtResource("7_e54xb")
+material3 = ExtResource("8_y4kj5")
+
+[node name="Bottom row" type="Node3D" parent="cublets"]
+
+[node name="Cubelet" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Cubelet2" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+
+[node name="Cubelet3" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Bottom row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="Middle row" type="Node3D" parent="cublets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+
+[node name="Cubelet" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Cubelet2" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+
+[node name="Cubelet3" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="Top row" type="Node3D" parent="cublets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="Cubelet" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
+
+[node name="Cubelet2" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+
+[node name="Cubelet3" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
+
+[node name="Cubelet4" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
+
+[node name="Cubelet5" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
+
+[node name="Cubelet6" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
+
+[node name="Cubelet7" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
+
+[node name="Cubelet8" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
+
+[node name="Cubelet9" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)

@@ -22,6 +22,8 @@ extends XRToolsPickable
 ## Distance from the handle origin to auto-snap the grab
 @export var snap_distance : float = 0.3
 
+@export var grab_distance : float = 0.1
+
 
 # Handle origin spatial node
 @onready var handle_origin: Node3D = get_parent()
@@ -53,6 +55,8 @@ func _process(_delta: float) -> void:
 	# If too far from the origin then drop the handle
 	var origin_pos = handle_origin.global_transform.origin
 	var handle_pos = global_transform.origin
+	#print(handle_pos.distance_to(origin_pos))
+	 
 	if handle_pos.distance_to(origin_pos) > snap_distance:
 		drop()
 
@@ -60,6 +64,13 @@ func _process(_delta: float) -> void:
 # Called when the handle is picked up
 func pick_up(by) -> void:
 	# Call the base-class to perform the pickup
+	#var origin_pos = handle_origin.global_transform.origin
+	var handle_pos = global_transform.origin
+	#print(handle_pos.distance_to(origin_pos))
+	print(handle_pos.distance_to(by.global_position))
+	if handle_pos.distance_to(by.global_position) > grab_distance:
+		return
+		
 	super(by)
 
 	# Enable the process function while held
