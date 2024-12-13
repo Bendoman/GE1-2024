@@ -7,12 +7,12 @@ signal right_by_button_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var parent = get_parent()
-	if(parent): 
-		parent.connect('left_ax_button_pressed', self.on_left_ax_click)
-		parent.connect('left_by_button_pressed', self.on_left_by_click)
-		parent.connect('right_ax_button_pressed', self.on_right_ax_click)
-		parent.connect('right_by_button_pressed', self.on_right_by_click)
+	#var parent = get_parent()
+	#if(parent): 
+		#parent.connect('left_ax_button_pressed', self.on_left_ax_click)
+		#parent.connect('left_by_button_pressed', self.on_left_by_click)
+		#parent.connect('right_ax_button_pressed', self.on_right_ax_click)
+		#parent.connect('right_by_button_pressed', self.on_right_by_click)
 	pass # Replace with function body.
 
 

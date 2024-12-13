@@ -4,7 +4,10 @@ extends XRToolsInteractableHandleDriven
 
 signal onSelectSignal
 signal onDeselectSignal
+signal selectableSignal
+signal unselectableSignal
 
+var selectable: bool = true
 var selected: bool = false
 
 ## XR Tools Interactable Hinge script
@@ -70,21 +73,35 @@ func _ready():
 	# Connect signals
 	if released.connect(_on_hinge_released):
 		push_error("Cannot connect hinge released signal")
-	connect('onSelectSignal', self.onSelect)
-	connect('onDeselectSignal', self.onDeselect)
+	connect('selectableSignal', self.setSelectable)
+	connect('unselectableSignal', self.setUnselectable)
+#
+func setSelectable():
+	print('selectable')
+	selectable = true
 
-func onSelect():
-	print('selected')
-	selected = true
-func onDeselect():
-	print('deselcted')
-	selected = false
+func setUnselectable():
+	print('unselectable')
+	selectable = false
 	
-var previousOffset = 0 
+var previousOffset = 0
 # Called every frame when one or more handles are held by the player
 func _process(_delta: float) -> void:
-	if not selected:
+	if not selectable and not selected:
 		return
+		
+	if not selected:
+		var emit_nodes = [
+			get_node("rotation_plane_body/body_mesh/RotationArea"), 
+			get_node("rotation_plane_body"), 
+			get_node("rotation_plane_body/body_mesh"),
+			get_parent().get_parent()
+		]
+		emit_signal('onSelectSignal', emit_nodes)
+		selected = true
+	#if not selected:
+		#return
+		
 	# Get the total handle angular offsets
 	var offset_sum := 0.0
 	for item in grabbed_handles:
@@ -173,34 +190,25 @@ func _physics_process(delta: float) -> void:
 		move_hinge(_hinge_position_rad + previousOffset)
 		if(previousOffset < 0):
 			previousOffset += abs(previousOffset) / 100
-			print(rotation_degrees.x)
 		elif(previousOffset > 0):
 			previousOffset -= abs(previousOffset) / 100			
-			#print(rotation_degrees.x)
-			#rotation_degrees.x = 0
-			#print(rotation_degrees.x)
-			
+
 		if(previousOffset != 0 and abs(0 - previousOffset) <= 0.005):
 			previousOffset = 0
-			
+
 			var hingePos = hinge_position
 			if(hingePos < 0):
-				print('Corrected ', (360 + hinge_position))
 				hingePos = 360 + hingePos
-			print(hinge_position, ' hinge pos')
 			
 			var closest = 0
 			var closest_distance = abs(snapAngles[0] - hingePos)
-			print(closest_distance, ' closest_distance')
 			
 			for i in range(1, len(snapAngles)):
-				print(snapAngles[i])
-				print(closest_distance, ' closest_distance')
-	
 				var distance = abs(snapAngles[i] - hingePos)
 				if(distance < closest_distance):
 					closest_distance = distance
 					closest = snapAngles[i]
-					print(closest_distance, ' new closest_distance ', closest, ' new closest')
 			_set_hinge_position(closest)
+			emit_signal("onDeselectSignal")
+			selected = false
 #			TODO Play snapping sound effect

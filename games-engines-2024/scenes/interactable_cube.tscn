@@ -24,11 +24,9 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 
 
 [node name="middle_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 1.05, -1.05)
-visible = false
 
 [node name="top_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 2.1, -1.05)
-visible = false
 
 [node name="cublets" type="Node3D" parent="."]
 script = ExtResource("5_mwdhc")
@@ -66,7 +64,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
 
 [node name="Middle row" type="Node3D" parent="cublets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
-visible = false
 
 [node name="Cubelet" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
@@ -96,7 +93,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
 
 [node name="Top row" type="Node3D" parent="cublets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
-visible = false
 
 [node name="Cubelet" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
