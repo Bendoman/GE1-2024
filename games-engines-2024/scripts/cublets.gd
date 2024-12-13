@@ -11,12 +11,14 @@ func _ready():
 			#print(cublet.get_child(0))
 			
 			if('Top' in node.name):
-				cublet.get_child(2).set_surface_override_material(0, material)
+				cublet.get_child(1).set_surface_override_material(0, material)
 			elif('Middle' in node.name):
-				cublet.get_child(2).set_surface_override_material(0, material2)
+				cublet.get_child(1).set_surface_override_material(0, material2)
 			elif('Bottom' in node.name):
-				cublet.get_child(2).set_surface_override_material(0, material3)
-			
+				if('2' in cublet.name):
+					cublet.get_child(1).set_surface_override_material(0, material)
+				else:
+					cublet.get_child(1).set_surface_override_material(0, material3)
 	pass # Replace with function body.
 
 

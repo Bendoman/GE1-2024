@@ -83,11 +83,8 @@ func onDeselect():
 var previousOffset = 0 
 # Called every frame when one or more handles are held by the player
 func _process(_delta: float) -> void:
-
-
 	if not selected:
 		return
-	
 	# Get the total handle angular offsets
 	var offset_sum := 0.0
 	for item in grabbed_handles:
@@ -123,7 +120,6 @@ func move_hinge(position: float) -> void:
 func _on_hinge_released(_interactable: XRToolsInteractableHinge):
 	if default_on_release:
 		move_hinge(_default_position_rad)
-
 
 # Called when hinge_limit_min is set externally
 func _set_hinge_limit_min(value: float) -> void:
@@ -171,13 +167,40 @@ func _do_move_hinge(position: float) -> float:
 	# Return the updated position
 	return position
 
+var snapAngles = [0, 90, 180, 270, 360]
 func _physics_process(delta: float) -> void:
 	if(grabbed_handles.size() == 0):
 		move_hinge(_hinge_position_rad + previousOffset)
 		if(previousOffset < 0):
 			previousOffset += abs(previousOffset) / 100
+			print(rotation_degrees.x)
 		elif(previousOffset > 0):
-			previousOffset -= abs(previousOffset) / 100
-		if(abs(0 - previousOffset) <= 0.001):
+			previousOffset -= abs(previousOffset) / 100			
+			#print(rotation_degrees.x)
+			#rotation_degrees.x = 0
+			#print(rotation_degrees.x)
+			
+		if(previousOffset != 0 and abs(0 - previousOffset) <= 0.005):
 			previousOffset = 0
-		
+			
+			var hingePos = hinge_position
+			if(hingePos < 0):
+				print('Corrected ', (360 + hinge_position))
+				hingePos = 360 + hingePos
+			print(hinge_position, ' hinge pos')
+			
+			var closest = 0
+			var closest_distance = abs(snapAngles[0] - hingePos)
+			print(closest_distance, ' closest_distance')
+			
+			for i in range(1, len(snapAngles)):
+				print(snapAngles[i])
+				print(closest_distance, ' closest_distance')
+	
+				var distance = abs(snapAngles[i] - hingePos)
+				if(distance < closest_distance):
+					closest_distance = distance
+					closest = snapAngles[i]
+					print(closest_distance, ' new closest_distance ', closest, ' new closest')
+			_set_hinge_position(closest)
+#			TODO Play snapping sound effect
