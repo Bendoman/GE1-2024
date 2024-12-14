@@ -79,10 +79,11 @@ func _ready():
 func setSelectable():
 	#print('selectable')
 	selectable = true
-
+	
 func setUnselectable():
 	#print('unselectable')
 	selectable = false
+	
 	
 var previousOffset = 0
 # Called every frame when one or more handles are held by the player

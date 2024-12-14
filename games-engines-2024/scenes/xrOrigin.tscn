@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dw7f1yfv67ywx"]
+[gd_scene load_steps=8 format=3 uid="uid://dw7f1yfv67ywx"]
 
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_3nymp"]
 [ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="3_47ht7"]
+[ext_resource type="Material" uid="uid://bi4l5dbon3ial" path="res://materials/hand_colour.tres" id="4_7bqas"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="4_hrrq6"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_2wrea"]
 [ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="5_l08a2"]
@@ -20,6 +21,7 @@ strafe = true
 [node name="FunctionPickup" parent="left_hand" instance=ExtResource("4_hrrq6")]
 
 [node name="LeftHand" parent="left_hand" instance=ExtResource("3_47ht7")]
+hand_material_override = ExtResource("4_7bqas")
 
 [node name="right_hand" type="XRController3D" parent="."]
 tracker = &"right_hand"
@@ -30,5 +32,6 @@ step_turn_angle = 45.0
 [node name="FunctionPickup" parent="right_hand" instance=ExtResource("4_hrrq6")]
 
 [node name="RightHand" parent="right_hand" instance=ExtResource("5_l08a2")]
+hand_material_override = ExtResource("4_7bqas")
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_usf4a")]
