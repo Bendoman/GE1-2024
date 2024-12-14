@@ -1,5 +1,4 @@
 # Work undertaken for week 5
 
 ## Completed rubiks cube prototype
-https://github.com/user-attachments/assets/4e619467-9270-413c-aaef-a19d5bf33501
-
+https://github.com/user-attachments/assets/6c6fd67f-7fd0-4202-a29d-b9994d503a32
