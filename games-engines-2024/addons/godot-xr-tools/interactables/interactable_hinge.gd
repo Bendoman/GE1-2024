@@ -6,8 +6,12 @@ signal onSelectSignal
 signal onDeselectSignal
 signal selectableSignal
 signal unselectableSignal
+signal playSnapSound
+
 var selectable: bool = true
 var selected: bool = false
+
+var audioStream: AudioStreamPlayer3D = null
 
 const handleMaterial = preload("res://materials/handle.tres")
 const transparentMaterial = preload("res://materials/transparent.tres")
@@ -62,7 +66,7 @@ func is_xr_class(name : String) -> bool:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for node in get_node('rotation_plane_body').get_children():
-		print(node)
+		#print(node)
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, handleMaterial)
@@ -83,9 +87,9 @@ func _ready():
 	connect('unselectableSignal', self.setUnselectable)
 #
 func setSelectable():
-	print('selectable')
+	#print('selectable')
 	for node in get_node('rotation_plane_body').get_children():
-		print(node)
+		#print(node)
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, handleMaterial)
@@ -93,9 +97,12 @@ func setSelectable():
 	selectable = true
 	
 func setUnselectable():
-	print('unselectable')
+	#print('unselectable')
 	selectable = false
-
+#	TODO: See why this isn't working
+	if(selected):
+		return
+		
 	for node in get_node('rotation_plane_body').get_children():
 		if('handle' not in node.name):
 			continue
@@ -203,7 +210,9 @@ func _do_move_hinge(position: float) -> float:
 	return position
 
 var snapAngles = [0, 90, 180, 270, 360]
+var audioSnapAngles = [0, 90, -90, 180, -180]
 func _physics_process(delta: float) -> void:
+#	TODO: Play snap sound on rotation
 	if(grabbed_handles.size() == 0):
 		move_hinge(_hinge_position_rad + previousOffset)
 		if(previousOffset < 0):
@@ -215,17 +224,28 @@ func _physics_process(delta: float) -> void:
 			previousOffset = 0
 
 			var hingePos = hinge_position
+			print('OG Hinge pos: ', hingePos)
 			if(hingePos < 0):
 				hingePos = 360 + hingePos
+				print('Corrected Hinge pos: ', hingePos)
 			
 			var closest = 0
 			var closest_distance = abs(snapAngles[0] - hingePos)
+			print('Closest distance: ', closest_distance)
 			
 			for i in range(1, len(snapAngles)):
 				var distance = abs(snapAngles[i] - hingePos)
+				print('Distance distance: ', distance)
 				if(distance < closest_distance):
 					closest_distance = distance
 					closest = snapAngles[i]
+					print('New closest distance: ', closest_distance)
+					print('New closest angle: ', closest)
+					
+			if(closest == 360):
+				closest = 0
+			print('Closest angle: ', closest)		
+			emit_signal("playSnapSound")
 			_set_hinge_position(closest)
 #			TODO: Find root cause of this bug instead of this workaround if there's time
 			await get_tree().create_timer(0.25).timeout

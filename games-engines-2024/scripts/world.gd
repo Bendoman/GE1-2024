@@ -9,8 +9,10 @@ signal right_ax_button_pressed
 signal right_by_button_pressed
 
 @onready var xr_origin_3d : XROrigin3D = $XROrigin3D
-@onready var xr_left_controller : XRController3D = xr_origin_3d.get_node("left_hand")
-@onready var xr_right_controller : XRController3D = xr_origin_3d.get_node("right_hand")
+@onready var xr_left_controller : XRController3D = xr_origin_3d.get_node("LeftHand")
+@onready var xr_right_controller : XRController3D = xr_origin_3d.get_node("RightHand")
+
+@onready var MASTER_BUS_ID = AudioServer.get_bus_index("Master")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,8 +26,6 @@ func _ready() -> void:
 		xr_right_controller.button_pressed.connect(_on_right_button_pressed)
 	else:
 		print('Failed to initialize OpenXR')
-		
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

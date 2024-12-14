@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvsrygsjaqq7e"]
+[gd_scene load_steps=13 format=3 uid="uid://dvsrygsjaqq7e"]
 
 [ext_resource type="Script" path="res://scripts/interactable_rotation_planes.gd" id="1_k4ukj"]
 [ext_resource type="Script" path="res://scripts/interactable_cube.gd" id="1_np1tr"]
@@ -10,6 +10,8 @@
 [ext_resource type="Material" uid="uid://0ajl5h4h5pbk" path="res://materials/orange_face.tres" id="8_y4kj5"]
 [ext_resource type="PackedScene" uid="uid://c2i58b3m6fkf0" path="res://scenes/interactable_rotation_plane.tscn" id="9_2xpmb"]
 [ext_resource type="PackedScene" uid="uid://t3b47lj1rvy7" path="res://scenes/cubelet.tscn" id="9_sqj7i"]
+[ext_resource type="AudioStream" uid="uid://bkopjif5xdw8h" path="res://sounds/click.mp3" id="11_7g8qv"]
+[ext_resource type="PackedScene" uid="uid://k7jxtfi4j4kd" path="res://scenes/beat_pad.tscn" id="11_rkwiu"]
 
 [node name="interactable_cube" type="Node3D"]
 script = ExtResource("1_np1tr")
@@ -135,5 +137,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
 [node name="Cubelet26" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
 
+[node name="beatPad" parent="cublets/Top row/Cubelet26" instance=ExtResource("11_rkwiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
 [node name="Cubelet27" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
+
+[node name="clickSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_7g8qv")

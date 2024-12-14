@@ -63,8 +63,13 @@ func _ready():
 		push_error("Unable to connect button area signal")
 
 
+var playing: bool = false
 # Called when an area or body enters the button area
 func _on_button_entered(item: Node3D) -> void:
+	print('entered')
+	if(not playing):
+		playing = true 
+	
 	# Add to the dictionary of trigger items
 	_trigger_items[item] = item
 
@@ -89,6 +94,9 @@ func _on_button_entered(item: Node3D) -> void:
 
 # Called when an area or body exits the button area
 func _on_button_exited(item: Node3D) -> void:
+	print('exited')
+	playing = false
+	
 	# Remove from the dictionary of triggered items
 	_trigger_items.erase(item)
 

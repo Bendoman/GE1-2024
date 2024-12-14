@@ -1,0 +1,59 @@
+[gd_scene load_steps=14 format=3 uid="uid://k7jxtfi4j4kd"]
+
+[ext_resource type="Material" uid="uid://c53c0dahi1eg2" path="res://materials/pad_button.tres" id="2_rtjqq"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="3_rkwm8"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="4_8pyi2"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="5_44fce"]
+[ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="5_xnrjh"]
+[ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="6_6w80h"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="7_d7klo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imq88"]
+size = Vector3(0.9, 0.05, 0.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sg2md"]
+material = ExtResource("2_rtjqq")
+size = Vector3(0.9, 0.05, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uuap0"]
+size = Vector3(0.9, 0.05, 0.9)
+
+[sub_resource type="Resource" id="Resource_lk7f2"]
+script = ExtResource("7_d7klo")
+open_pose = ExtResource("6_6w80h")
+closed_pose = ExtResource("6_6w80h")
+
+[sub_resource type="Resource" id="Resource_fou27"]
+script = ExtResource("7_d7klo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g5f34"]
+size = Vector3(0.9, 0.1, 0.9)
+
+[node name="beatPad" type="Node3D"]
+
+[node name="button" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="button"]
+shape = SubResource("BoxShape3D_imq88")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="button"]
+mesh = SubResource("BoxMesh_sg2md")
+
+[node name="InteractableAreaButton" parent="." instance=ExtResource("3_rkwm8")]
+button = NodePath("../button")
+duration = 0.05
+
+[node name="XRToolsRumbler" type="Node" parent="InteractableAreaButton"]
+script = ExtResource("4_8pyi2")
+event = ExtResource("5_xnrjh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableAreaButton"]
+shape = SubResource("BoxShape3D_uuap0")
+
+[node name="HandPoseArea" parent="." instance=ExtResource("5_44fce")]
+left_pose = SubResource("Resource_lk7f2")
+right_pose = SubResource("Resource_fou27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("BoxShape3D_g5f34")

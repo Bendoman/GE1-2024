@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0m0jj5cxlrjs"]
+[gd_scene load_steps=13 format=3 uid="uid://c0m0jj5cxlrjs"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_mot7s"]
 [ext_resource type="PackedScene" uid="uid://dw7f1yfv67ywx" path="res://scenes/xrOrigin.tscn" id="2_qpxi4"]
 [ext_resource type="PackedScene" uid="uid://dvsrygsjaqq7e" path="res://scenes/interactable_cube.tscn" id="4_g8btw"]
-[ext_resource type="Material" uid="uid://dyt20tqm5x44a" path="res://materials/blue_face.tres" id="5_fhv33"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n2cwj"]
 sky_top_color = Color(0.425909, 0.569805, 0.704866, 1)
@@ -25,6 +24,29 @@ size = Vector3(10, 0.1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_16tix"]
 size = Vector3(10, 0.1, 10)
+
+[sub_resource type="Shader" id="Shader_cuv1b"]
+code = "shader_type spatial;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+	
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	ALBEDO = vec3(0.0, 0.0, 1.0);
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the material.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_140hq"]
+render_priority = 0
+shader = SubResource("Shader_cuv1b")
 
 [sub_resource type="BoxMesh" id="BoxMesh_mt4iv"]
 
@@ -52,7 +74,7 @@ mesh = SubResource("BoxMesh_16tix")
 
 [node name="Table" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.86113, 0.750379, -2.79727)
-material_override = ExtResource("5_fhv33")
+material_override = SubResource("ShaderMaterial_140hq")
 mesh = SubResource("BoxMesh_mt4iv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Table"]

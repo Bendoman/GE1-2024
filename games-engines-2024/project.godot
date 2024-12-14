@@ -14,10 +14,6 @@ config/name="Games Engines 2024"
 run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
-[audio]
-
-buses/default_bus_layout=""
-
 [autoload]
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"

@@ -24,6 +24,8 @@ var planes = [
 	'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
 	'front_face_plane', 'middle_face_plane', 'back_face_plane'
 ]
+
+@onready var audioPlayer = $"../clickSound"
 	#'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
 	#'front_face_plane', 'middle_face_plane', 'back_face_plane'
 
@@ -61,7 +63,10 @@ func onDeselect(area: Area3D):
 			#continue
 		#print(node)
 		#node.get_parent().remove_child(node)
-		
+func onPlaySnapSound():
+	audioPlayer.play()
+	print('play sound here')
+	
 # TODO: Only set handle materials to be visible. Rotation area shouldn't be visible. 
 func set_default_materials():
 	for plane in planes:
@@ -69,6 +74,7 @@ func set_default_materials():
 		var hinge = get_node(plane).get_node('hingeOrigin/InteractableHinge')
 		hinge.connect('onSelectSignal', self.onSelect)
 		hinge.connect('onDeselectSignal', self.onDeselect)
+		hinge.connect('playSnapSound', self.onPlaySnapSound)
 
 func swap_highlighted_plane_new(plane_nodes):
 	plane_nodes[2].set_surface_override_material(0, highlighted_material)
@@ -85,7 +91,7 @@ func swap_highlighted_plane_new(plane_nodes):
 		#node.global_rotation = old_rotation
 		node.global_position = old_position
 	pass
-	print('=\n')
+	#print('=\n')
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
