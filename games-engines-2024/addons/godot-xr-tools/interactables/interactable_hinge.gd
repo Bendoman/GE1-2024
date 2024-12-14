@@ -77,11 +77,11 @@ func _ready():
 	connect('unselectableSignal', self.setUnselectable)
 #
 func setSelectable():
-	print('selectable')
+	#print('selectable')
 	selectable = true
 
 func setUnselectable():
-	print('unselectable')
+	#print('unselectable')
 	selectable = false
 	
 var previousOffset = 0
@@ -209,6 +209,9 @@ func _physics_process(delta: float) -> void:
 					closest_distance = distance
 					closest = snapAngles[i]
 			_set_hinge_position(closest)
-			emit_signal("onDeselectSignal")
+#			TODO: Find root cause of this bug instead of this workaround if there's time
+			await get_tree().create_timer(0.25).timeout
+			
+			emit_signal("onDeselectSignal", get_node("rotation_plane_body/body_mesh/RotationArea"))
 			selected = false
 #			TODO Play snapping sound effect

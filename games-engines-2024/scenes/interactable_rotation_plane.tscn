@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2i58b3m6fkf0"]
+[gd_scene load_steps=18 format=3 uid="uid://c2i58b3m6fkf0"]
 
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/interactables/interactable_hinge.tscn" id="1_6qtc2"]
 [ext_resource type="PackedScene" uid="uid://bddj5m7ull6g0" path="res://addons/godot-xr-tools/interactables/interactable_handle.tscn" id="2_moeun"]
+[ext_resource type="Material" uid="uid://i883r1hryk17" path="res://materials/handle.tres" id="2_wrtpo"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_auo3h"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_5k04r"]
 [ext_resource type="Animation" uid="uid://di384xtde8ydf" path="res://addons/godot-xr-tools/hands/animations/left/Grip 2.res" id="5_gu8rq"]
@@ -14,10 +15,21 @@ size = Vector3(1.001, 3.101, 3.101)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ou5fh"]
 size = Vector3(1.001, 3.101, 3.101)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_6akej"]
-top_radius = 0.025
-bottom_radius = 0.025
-height = 1.002
+[sub_resource type="SphereMesh" id="SphereMesh_ar04i"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_phos2"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_cxknq"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_vbxxy"]
+radius = 0.05
+height = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3loe"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -51,32 +63,37 @@ mesh = SubResource("BoxMesh_5g1g2")
 shape = SubResource("BoxShape3D_ou5fh")
 
 [node name="handleShape" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.55, 1.55)
-mesh = SubResource("CylinderMesh_6akej")
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.525, 1.525)
+material_override = ExtResource("2_wrtpo")
+mesh = SubResource("SphereMesh_ar04i")
 skeleton = NodePath("../../../..")
 
 [node name="handleShape2" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.55, -1.55)
-mesh = SubResource("CylinderMesh_6akej")
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.525, -1.525)
+material_override = ExtResource("2_wrtpo")
+mesh = SubResource("SphereMesh_phos2")
 skeleton = NodePath("../../../..")
 
 [node name="handleShape3" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.55, 1.55)
-mesh = SubResource("CylinderMesh_6akej")
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.525, 1.525)
+material_override = ExtResource("2_wrtpo")
+mesh = SubResource("SphereMesh_cxknq")
 skeleton = NodePath("../../../..")
 
 [node name="handleShape4" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.55, -1.55)
-mesh = SubResource("CylinderMesh_6akej")
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.525, -1.525)
+material_override = ExtResource("2_wrtpo")
+mesh = SubResource("SphereMesh_vbxxy")
 skeleton = NodePath("../../../..")
 
 [node name="handleContainer" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 1.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 1.525)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
 
 [node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer/handle1" instance=ExtResource("2_moeun")]
 freeze = true
+grab_distance = 0.1
 ranged_grab_method = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer/handle1/InteractableHandle"]
@@ -91,89 +108,14 @@ hand_pose = SubResource("Resource_5g2vu")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
 hand_pose = SubResource("Resource_tmc55")
 
-[node name="handle2" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer/handle2" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer/handle2/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer/handle2/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer/handle2/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle3" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer/handle3" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer/handle3/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer/handle3/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer/handle3/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle4" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer/handle4" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer/handle4/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer/handle4/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer/handle4/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle5" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500178, -0.00131655, 0.000939727)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer/handle5" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer/handle5/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer/handle5/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer/handle5/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
 [node name="handleContainer2" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, -1.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, -1.525)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
 
 [node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer2/handle1" instance=ExtResource("2_moeun")]
 freeze = true
+grab_distance = 0.1
 ranged_grab_method = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer2/handle1/InteractableHandle"]
@@ -188,89 +130,14 @@ hand_pose = SubResource("Resource_5g2vu")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
 hand_pose = SubResource("Resource_tmc55")
 
-[node name="handle2" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer2/handle2" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer2/handle2/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer2/handle2/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer2/handle2/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle3" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer2/handle3" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer2/handle3/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer2/handle3/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer2/handle3/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle4" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer2/handle4" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer2/handle4/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer2/handle4/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer2/handle4/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle5" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500178, -0.00131655, 0.000939727)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer2/handle5" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer2/handle5/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer2/handle5/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer2/handle5/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
 [node name="handleContainer3" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55, 1.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.525, 1.525)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
 
 [node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer3/handle1" instance=ExtResource("2_moeun")]
 freeze = true
+grab_distance = 0.1
 ranged_grab_method = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer3/handle1/InteractableHandle"]
@@ -285,89 +152,14 @@ hand_pose = SubResource("Resource_5g2vu")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
 hand_pose = SubResource("Resource_tmc55")
 
-[node name="handle2" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer3/handle2" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer3/handle2/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer3/handle2/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer3/handle2/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle3" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer3/handle3" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer3/handle3/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer3/handle3/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer3/handle3/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle4" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer3/handle4" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer3/handle4/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer3/handle4/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer3/handle4/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle5" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500178, -0.00131655, 0.000939727)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer3/handle5" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer3/handle5/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer3/handle5/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer3/handle5/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
 [node name="handleContainer4" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.55, -1.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.525, -1.525)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
 
 [node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer4/handle1" instance=ExtResource("2_moeun")]
 freeze = true
+grab_distance = 0.1
 ranged_grab_method = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer4/handle1/InteractableHandle"]
@@ -379,81 +171,5 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477
 hand_pose = SubResource("Resource_5g2vu")
 
 [node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer4/handle1/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle2" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer4/handle2" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer4/handle2/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer4/handle2/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer4/handle2/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle3" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer4/handle3" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer4/handle3/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer4/handle3/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer4/handle3/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle4" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer4/handle4" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer4/handle4/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer4/handle4/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer4/handle4/InteractableHandle" instance=ExtResource("5_5k04r")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
-hand_pose = SubResource("Resource_tmc55")
-
-[node name="handle5" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.500178, -0.00131655, 0.000939727)
-
-[node name="InteractableHandle" parent="hingeOrigin/InteractableHinge/handleContainer4/handle5" instance=ExtResource("2_moeun")]
-freeze = true
-ranged_grab_method = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hingeOrigin/InteractableHinge/handleContainer4/handle5/InteractableHandle"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_i3loe")
-
-[node name="GrabPointHandLeft" parent="hingeOrigin/InteractableHinge/handleContainer4/handle5/InteractableHandle" instance=ExtResource("4_auo3h")]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0477425, -0.00453758, -0.0653219)
-hand_pose = SubResource("Resource_5g2vu")
-
-[node name="GrabPointHandRight" parent="hingeOrigin/InteractableHinge/handleContainer4/handle5/InteractableHandle" instance=ExtResource("5_5k04r")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0441545, 0.0064218, -0.0745113)
 hand_pose = SubResource("Resource_tmc55")

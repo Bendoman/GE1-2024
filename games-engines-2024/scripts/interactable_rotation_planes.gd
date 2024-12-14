@@ -19,7 +19,13 @@ var face_planes = ['bottom_face_plane', 'middle_face_plane', 'top_face_plane']
 
 var highlighted_plane_type = 'HORIZONTAL'
 
-var planes = ['bottom_horizontal_plane', 'middle_horizontal_plane', 'top_horizontal_plane']
+var planes = [
+	'bottom_horizontal_plane', 'middle_horizontal_plane', 'top_horizontal_plane',
+	'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
+	'front_face_plane', 'middle_face_plane', 'back_face_plane'
+]
+	#'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
+	#'front_face_plane', 'middle_face_plane', 'back_face_plane'
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,8 +39,8 @@ func _ready():
 
 var rotationType
 func onSelect(emitted_nodes):
-	print('selected', emitted_nodes)
-	print(emitted_nodes[3].name)
+	#print('selected', emitted_nodes)
+	#print(emitted_nodes[3].name)
 	rotationType = emitted_nodes[3].name.split('_')[1]
 	
 	for plane in planes:
@@ -44,12 +50,18 @@ func onSelect(emitted_nodes):
 	
 	swap_highlighted_plane_new(emitted_nodes)
 	
-func onDeselect():
+func onDeselect(area: Area3D):
 	for plane in planes:
 		get_node(plane).get_node(plane_mesh_path).set_surface_override_material(0, default_material)
 		var hinge = get_node(plane).get_node('hingeOrigin/InteractableHinge')
 		hinge.emit_signal('selectableSignal')
-
+	
+	#for node in area.get_overlapping_areas():
+		#if('Cubelet' not in node.name):
+			#continue
+		#print(node)
+		#node.get_parent().remove_child(node)
+		
 # TODO: Only set handle materials to be visible. Rotation area shouldn't be visible. 
 func set_default_materials():
 	for plane in planes:
@@ -65,15 +77,16 @@ func swap_highlighted_plane_new(plane_nodes):
 	for node in rotationArea.get_overlapping_bodies():
 		if('Cubelet' not in node.name):
 			continue
-		print(node)
-		var old_rotation = node.global_rotation
+		#print(node)
+		#var old_rotation = node.global_rotation
 		var old_position = node.global_position
+		print(node.global_position)
 		node.get_parent().remove_child(node)
 		plane_nodes[1].add_child(node)
-		node.global_rotation = old_rotation
+		#node.global_rotation = old_rotation
 		node.global_position = old_position
 	pass
-
+	print('=\n')
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -28,6 +28,24 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 
 [node name="top_horizontal_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.05, 2.1, -1.05)
 
+[node name="left_vertical_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -1.05)
+
+[node name="middle_vertical_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 1.05, -1.05)
+
+[node name="right_vertical_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 1.05, -1.05)
+
+[node name="front_face_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.05, 1.05, 0)
+
+[node name="middle_face_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.05, 1.05, -1.05)
+
+[node name="back_face_plane" parent="rotation_planes" instance=ExtResource("9_2xpmb")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.05, 1.05, -2.1)
+
 [node name="cublets" type="Node3D" parent="."]
 script = ExtResource("5_mwdhc")
 material = ExtResource("6_5bekk")
@@ -65,57 +83,57 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
 [node name="Middle row" type="Node3D" parent="cublets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 
-[node name="Cubelet" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet10" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
 
-[node name="Cubelet2" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet11" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 
-[node name="Cubelet3" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet12" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
 
-[node name="Cubelet4" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet13" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
 
-[node name="Cubelet5" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet14" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
 
-[node name="Cubelet6" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet15" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
 
-[node name="Cubelet7" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet16" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
 
-[node name="Cubelet8" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet17" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
 
-[node name="Cubelet9" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet18" parent="cublets/Middle row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
 
 [node name="Top row" type="Node3D" parent="cublets"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 
-[node name="Cubelet" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet19" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, 0)
 
-[node name="Cubelet2" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet20" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 
-[node name="Cubelet3" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet21" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, 0)
 
-[node name="Cubelet4" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet22" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -1.05)
 
-[node name="Cubelet5" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet23" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05)
 
-[node name="Cubelet6" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet24" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
 
-[node name="Cubelet7" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet25" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
 
-[node name="Cubelet8" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet26" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
 
-[node name="Cubelet9" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
+[node name="Cubelet27" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)

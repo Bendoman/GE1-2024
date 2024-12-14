@@ -22,7 +22,7 @@ extends XRToolsPickable
 ## Distance from the handle origin to auto-snap the grab
 @export var snap_distance : float = 0.3
 
-@export var grab_distance : float = 0.1
+@export var grab_distance : float = 0.75
 
 
 # Handle origin spatial node
