@@ -26,6 +26,7 @@ var planes = [
 ]
 
 @onready var audioPlayer = $"../clickSound"
+@export var hitzone: Area3D
 	#'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
 	#'front_face_plane', 'middle_face_plane', 'back_face_plane'
 
@@ -51,18 +52,18 @@ func onSelect(emitted_nodes):
 		hinge.emit_signal('unselectableSignal')
 	
 	swap_highlighted_plane_new(emitted_nodes)
-	
+
 func onDeselect(area: Area3D):
 	for plane in planes:
 		get_node(plane).get_node(plane_mesh_path).set_surface_override_material(0, default_material)
 		var hinge = get_node(plane).get_node('hingeOrigin/InteractableHinge')
 		hinge.emit_signal('selectableSignal')
 	
-	#for node in area.get_overlapping_areas():
-		#if('Cubelet' not in node.name):
-			#continue
-		#print(node)
-		#node.get_parent().remove_child(node)
+	for node in area.get_overlapping_bodies():
+		if('Cubelet' in node.name):
+			continue
+		node.get_node('../InteractableAreaButton').emit_signal('deselectSignal')
+
 func onPlaySnapSound():
 	audioPlayer.play()
 	print('play sound here')
@@ -78,21 +79,17 @@ func set_default_materials():
 
 func swap_highlighted_plane_new(plane_nodes):
 	plane_nodes[2].set_surface_override_material(0, highlighted_material)
-
 	var rotationArea = plane_nodes[0]
 	for node in rotationArea.get_overlapping_bodies():
 		if('Cubelet' not in node.name):
+			node.get_node('../InteractableAreaButton').emit_signal('selectSignal')
 			continue
-		#print(node)
-		#var old_rotation = node.global_rotation
-		var old_position = node.global_position
+		var old_transform = node.global_transform
 		node.get_parent().remove_child(node)
 		plane_nodes[1].add_child(node)
-		#node.global_rotation = old_rotation
-		node.global_position = old_position
-	pass
-	#print('=\n')
-	
+		node.global_transform = old_transform
+		hitzone.collision_layer = 1
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

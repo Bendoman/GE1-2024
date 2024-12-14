@@ -16,6 +16,8 @@ signal button_pressed(button)
 ## Button released event
 signal button_released(button)
 
+signal selectSignal
+signal deselectSignal
 
 ## Button object
 @export var button := NodePath()
@@ -26,6 +28,7 @@ signal button_released(button)
 ## Displacement duration
 @export var duration : float = 0.1
 
+@onready var hitzone: Area3D = get_node("..").hitzone
 
 ## If true, the button is pressed
 var pressed : bool = false
@@ -49,6 +52,7 @@ var _tween: Tween
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsInteractableAreaButton"
 
+@onready var pad_sound = $"../pad_sound"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,19 +66,49 @@ func _ready():
 	if body_exited.connect(_on_button_exited):
 		push_error("Unable to connect button area signal")
 
+	connect('button_pressed', self.onPress)
+	connect('button_released', self.onRelease)
+	connect('selectSignal', self.onSelect)
+	connect('deselectSignal', self.onDeselect)
 
-var playing: bool = false
+var selected: bool = false
+func onSelect(): 
+	print('button set to selected')
+	selected = true
+
+func onDeselect():
+	print('button set to deselected')
+	selected = false
+
+func onPress(button):
+	#emit_signal('play_sound', 'kick')
+	print('pressed')
+	print(hitzone.get_overlapping_bodies())
+	print(get_node("../button") in hitzone.get_overlapping_bodies())
+	if(get_node("../button") in hitzone.get_overlapping_bodies() and not selected):
+		pad_sound.play()
+
+func onRelease(button):
+	print('released')
+	pass
+
 # Called when an area or body enters the button area
+#TODO: Come back tot his
+#var locked: bool = false
 func _on_button_entered(item: Node3D) -> void:
-	print('entered')
-	if(not playing):
-		playing = true 
-	
+	#print(item)
 	# Add to the dictionary of trigger items
 	_trigger_items[item] = item
-
 	# Detect transition to pressed
 	if !pressed:
+		#var handle_pos = global_transform.origin
+		#var dist = item.global_position.y - global_position.y
+		#print(dist)
+		#if dist < 0:
+			#locked = true
+			#print('locking')
+			#return
+			
 		# Update state to pressed
 		pressed = true
 
@@ -91,14 +125,14 @@ func _on_button_entered(item: Node3D) -> void:
 		# Emit the pressed signal
 		button_pressed.emit(self)
 
-
 # Called when an area or body exits the button area
 func _on_button_exited(item: Node3D) -> void:
-	print('exited')
-	playing = false
-	
 	# Remove from the dictionary of triggered items
 	_trigger_items.erase(item)
+	
+	#if(locked and _trigger_items.is_empty()):
+		#locked = false
+		#print('unlocking')
 
 	# Detect transition to released
 	if pressed and _trigger_items.is_empty():

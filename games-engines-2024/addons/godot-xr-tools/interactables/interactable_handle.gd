@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 # Called when the handle is picked up
 func pick_up(by) -> void:
 	# Call the base-class to perform the pickup
+	print(by)
 	var handle_pos = global_transform.origin
 	if handle_pos.distance_to(by.global_position) > grab_distance:
 		return

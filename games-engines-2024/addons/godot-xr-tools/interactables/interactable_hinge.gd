@@ -93,7 +93,8 @@ func setSelectable():
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, handleMaterial)
-		
+#	TODO: Find root cause of this bug instead of this workaround if there's time
+	await get_tree().create_timer(0.05).timeout
 	selectable = true
 	
 func setUnselectable():
@@ -225,9 +226,15 @@ func _physics_process(delta: float) -> void:
 
 			var hingePos = hinge_position
 			print('OG Hinge pos: ', hingePos)
-			if(hingePos < 0):
-				hingePos = 360 + hingePos
-				print('Corrected Hinge pos: ', hingePos)
+			while(hingePos < 0):
+				hingePos += 360
+			while(hingePos > 360):
+				hingePos -= 360
+			print('Corrected Hinge pos: ', hingePos)
+			
+			#if(hingePos < 0):
+				#hingePos = 360 + hingePos
+				#print('Corrected Hinge pos: ', hingePos)
 			
 			var closest = 0
 			var closest_distance = abs(snapAngles[0] - hingePos)
@@ -244,11 +251,9 @@ func _physics_process(delta: float) -> void:
 					
 			if(closest == 360):
 				closest = 0
-			print('Closest angle: ', closest)		
+			#print('Closest angle: ', closest)		
 			emit_signal("playSnapSound")
 			_set_hinge_position(closest)
-#			TODO: Find root cause of this bug instead of this workaround if there's time
-			await get_tree().create_timer(0.25).timeout
 			
 			emit_signal("onDeselectSignal", get_node("rotation_plane_body/body_mesh/RotationArea"))
 			selected = false
