@@ -6,10 +6,11 @@ signal onSelectSignal
 signal onDeselectSignal
 signal selectableSignal
 signal unselectableSignal
-
 var selectable: bool = true
 var selected: bool = false
 
+const handleMaterial = preload("res://materials/handle.tres")
+const transparentMaterial = preload("res://materials/transparent.tres")
 ## XR Tools Interactable Hinge script
 ##
 ## The interactable hinge is a hinge transform node controlled by the
@@ -60,6 +61,11 @@ func is_xr_class(name : String) -> bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for node in get_node('rotation_plane_body').get_children():
+		print(node)
+		if('handle' not in node.name):
+			continue
+		node.set_surface_override_material(0, handleMaterial)
 	# In Godot 4 we must now manually call our super class ready function
 	super()
 
@@ -77,12 +83,23 @@ func _ready():
 	connect('unselectableSignal', self.setUnselectable)
 #
 func setSelectable():
-	#print('selectable')
+	print('selectable')
+	for node in get_node('rotation_plane_body').get_children():
+		print(node)
+		if('handle' not in node.name):
+			continue
+		node.set_surface_override_material(0, handleMaterial)
+		
 	selectable = true
 	
 func setUnselectable():
-	#print('unselectable')
+	print('unselectable')
 	selectable = false
+
+	for node in get_node('rotation_plane_body').get_children():
+		if('handle' not in node.name):
+			continue
+		node.set_surface_override_material(0, transparentMaterial)
 	
 	
 var previousOffset = 0

@@ -80,7 +80,6 @@ func swap_highlighted_plane_new(plane_nodes):
 		#print(node)
 		#var old_rotation = node.global_rotation
 		var old_position = node.global_position
-		print(node.global_position)
 		node.get_parent().remove_child(node)
 		plane_nodes[1].add_child(node)
 		#node.global_rotation = old_rotation
