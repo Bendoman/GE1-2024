@@ -85,8 +85,9 @@ func onPress(button):
 	#print('pressed')
 	#print(hitzone.get_overlapping_bodies())
 	#print(get_node("../button") in hitzone.get_overlapping_bodies())
-	if(get_node("../button") in hitzone.get_overlapping_bodies()):
-		pad_sound.play()
+	#if(get_node("../button") in hitzone.get_overlapping_bodies()):
+		#pad_sound.play()
+	pad_sound.play()
 
 func onRelease(button):
 	#print('released')

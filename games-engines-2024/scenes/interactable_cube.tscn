@@ -202,6 +202,7 @@ volume_db = -10.0
 
 [node name="hitzone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.025, 2.699, -1.025)
+visible = false
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("13_ldtd0")

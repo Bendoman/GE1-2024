@@ -8,6 +8,9 @@ signal left_by_button_pressed
 signal right_ax_button_pressed
 signal right_by_button_pressed
 
+signal left_trigger_click_pressed
+signal right_trigger_click_pressed
+
 @onready var xr_origin_3d : XROrigin3D = $XROrigin3D
 @onready var xr_left_controller : XRController3D = xr_origin_3d.get_node("LeftHand")
 @onready var xr_right_controller : XRController3D = xr_origin_3d.get_node("RightHand")
@@ -36,9 +39,13 @@ func _on_left_button_pressed(button_name: String) -> void:
 			emit_signal("left_ax_button_pressed")
 		"by_button":
 			emit_signal("left_by_button_pressed")
+		"trigger_click":
+			emit_signal("left_trigger_click_pressed")
 func _on_right_button_pressed(button_name: String) -> void:
 	match button_name:
 		"ax_button":
 			emit_signal("right_ax_button_pressed")
 		"by_button":
 			emit_signal("right_by_button_pressed")
+		"trigger_click":
+			emit_signal("right_trigger_click_pressed")
