@@ -8,5 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#print(self.get_overlapping_areas(), self.get_overlapping_bodies())
 	pass

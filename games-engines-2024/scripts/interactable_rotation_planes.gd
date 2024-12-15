@@ -26,6 +26,8 @@ var planes = [
 ]
 
 @onready var audioPlayer = $"../clickSound"
+@onready var effects_bus_index = AudioServer.get_bus_index("effects_bus")
+
 @export var hitzone: Area3D
 	#'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
 	#'front_face_plane', 'middle_face_plane', 'back_face_plane'
@@ -64,6 +66,22 @@ func onDeselect(area: Area3D):
 			continue
 		#node.get_node('../InteractableAreaButton').emit_signal('deselectSignal')
 	hitzone.collision_layer = 2
+	await get_tree().create_timer(0.05).timeout
+	print(hitzone.get_overlapping_bodies())
+	
+#	Reset all effects here
+	print()
+	while AudioServer.get_bus_effect_count(effects_bus_index) > 0:
+		print('Removing effect after rotation: ', AudioServer.get_bus_effect(effects_bus_index, 0))
+		AudioServer.remove_bus_effect(effects_bus_index, 0)
+		
+	for item in hitzone.get_overlapping_bodies():
+		var root = item.get_parent()
+		if 'switch' in root.name and root.active:
+			print('active')
+#			Reactivate only effects that are in zone
+			AudioServer.add_bus_effect(effects_bus_index, root.effect)
+
 
 func onPlaySnapSound():
 	audioPlayer.play()

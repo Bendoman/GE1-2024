@@ -53,7 +53,7 @@ var _tween: Tween
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsInteractableAreaButton"
 
-@onready var pad_sound = $"../pad_sound"
+@onready var switch_sound = $"../switch_sound"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -87,6 +87,7 @@ func onPress(button):
 	#print(hitzone.get_overlapping_bodies())
 	#print(get_node("../button") in hitzone.get_overlapping_bodies())
 	if(get_node("../button") in hitzone.get_overlapping_bodies()):
+		switch_sound.play()
 		emit_signal("hitSignal")
 
 func onRelease(button):

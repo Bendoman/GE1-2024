@@ -85,4 +85,4 @@ mesh = SubResource("BoxMesh_mt4iv")
 shape = SubResource("BoxShape3D_dn2wk")
 
 [node name="interactable_cube" parent="." instance=ExtResource("4_g8btw")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.337229, 1.3302, 0.565274)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0559704, 1.17913, -0.0310872)
