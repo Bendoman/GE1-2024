@@ -1,5 +1,5 @@
 @tool
-class_name XRToolsGrabPointHand
+class_name ThereminXRToolsGrabPointHand
 extends XRToolsGrabPoint
 
 
@@ -78,7 +78,7 @@ func _ready():
 
 ## Test if a grabber can grab by this grab-point
 func can_grab(grabber : Node3D, current : XRToolsGrabPoint) -> float:
-	#scale = scale/Global.cube_scale
+	scale = scale/Global.cube_scale
 	# Skip if not enabled
 	if not enabled:
 		return 0.0

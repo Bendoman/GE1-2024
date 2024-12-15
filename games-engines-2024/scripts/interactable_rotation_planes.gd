@@ -27,6 +27,7 @@ var planes = [
 
 @onready var audioPlayer = $"../clickSound"
 @onready var effects_bus_index = AudioServer.get_bus_index("effects_bus")
+@onready var theremin_effects_bus_index = AudioServer.get_bus_index("theremin_effects")
 
 @export var hitzone: Area3D
 	#'left_vertical_plane', 'middle_vertical_plane', 'right_vertical_plane',
@@ -70,18 +71,21 @@ func onDeselect(area: Area3D):
 	print(hitzone.get_overlapping_bodies())
 	
 #	Reset all effects here
-	print()
+	#print()
 	while AudioServer.get_bus_effect_count(effects_bus_index) > 0:
-		print('Removing effect after rotation: ', AudioServer.get_bus_effect(effects_bus_index, 0))
+		#print('Removing effect after rotation: ', AudioServer.get_bus_effect(effects_bus_index, 0))
 		AudioServer.remove_bus_effect(effects_bus_index, 0)
+	while AudioServer.get_bus_effect_count(theremin_effects_bus_index) > 0:
+		AudioServer.remove_bus_effect(theremin_effects_bus_index, 0)
 		
 	for item in hitzone.get_overlapping_bodies():
 		var root = item.get_parent()
 		if 'switch' in root.name and root.active:
-			print('active')
+			#print('active')
 #			Reactivate only effects that are in zone
 			AudioServer.add_bus_effect(effects_bus_index, root.effect)
-
+			if('Reverb' not in root.effect.get_class()):
+				AudioServer.add_bus_effect(theremin_effects_bus_index, root.effect)
 
 func onPlaySnapSound():
 	audioPlayer.play()

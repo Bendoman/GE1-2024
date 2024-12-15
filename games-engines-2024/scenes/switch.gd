@@ -10,6 +10,7 @@ signal deactivateSignal
 @onready var button_body:StaticBody3D = get_node('button')
 @onready var button_mesh:MeshInstance3D = button_body.get_node('button')
 @onready var effects_bus_index = AudioServer.get_bus_index("effects_bus")
+@onready var theremin_effects_bus_index = AudioServer.get_bus_index("theremin_effects")
 
 const SWITCH_PRESSED = preload("res://materials/switch_pressed.tres")
 const SWITCH_UNPRESSED = preload("res://materials/switch_unpressed.tres")
@@ -23,6 +24,9 @@ func onHit():
 	if(active): 
 		button_mesh.set_surface_override_material(0, SWITCH_PRESSED)
 		AudioServer.add_bus_effect(effects_bus_index, effect, 0)
+		if('Reverb' not in effect.get_class()):
+			AudioServer.add_bus_effect(theremin_effects_bus_index, effect, 0)
+		
 		print('Adding effect: ', effect)
 	else: 
 		button_mesh.set_surface_override_material(0, SWITCH_UNPRESSED)
@@ -32,7 +36,8 @@ func onHit():
 			if(e and e.get_class() == effect.get_class()):
 				print('removing effect: ', AudioServer.get_bus_effect(effects_bus_index, i))
 				AudioServer.remove_bus_effect(effects_bus_index, i)
-
+				if('Reverb' not in e.get_class()):
+					AudioServer.remove_bus_effect(theremin_effects_bus_index, i)
 
 func onDrop():
 	print('deactivated')

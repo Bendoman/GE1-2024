@@ -18,7 +18,7 @@ extends XRToolsInteractableHandleDriven
 ## Signal for slider moved
 signal slider_moved(position)
 
-
+@export var cube_scale:float
 ## Slider minimum limit
 @export var slider_limit_min : float = 0.0
 
@@ -74,7 +74,8 @@ func _process(_delta: float) -> void:
 	var offset := offset_sum.x / grabbed_handles.size()
 
 	# Move the slider by the requested offset
-	move_slider(slider_position + offset)
+	
+	move_slider(slider_position + (offset / Global.cube_scale))
 
 
 # Move the slider to the specified position
@@ -89,7 +90,6 @@ func move_slider(position: float) -> void:
 
 	# Emit the moved signal
 	emit_signal("slider_moved", position)
-
 
 # Handle release of slider
 func _on_slider_released(_interactable: XRToolsInteractableSlider):

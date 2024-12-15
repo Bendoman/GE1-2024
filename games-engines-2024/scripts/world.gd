@@ -26,7 +26,6 @@ func _ready() -> void:
 		xr_right_controller.button_pressed.connect(_on_right_button_pressed)
 	else:
 		print('Failed to initialize OpenXR')
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

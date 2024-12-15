@@ -1,9 +1,7 @@
 @tool
-class_name XRToolsInteractableHandle
+class_name ThereminXRToolsInteractableHandle
 extends XRToolsPickable
 
-signal pickedUpSignal
-signal droppedSignal
 
 ## XR Tools Interactable Handle script
 ##
@@ -23,8 +21,6 @@ signal droppedSignal
 
 ## Distance from the handle origin to auto-snap the grab
 @export var snap_distance : float = 0.3
-
-@export var grab_distance : float = 0.05
 
 
 # Handle origin spatial node
@@ -57,8 +53,6 @@ func _process(_delta: float) -> void:
 	# If too far from the origin then drop the handle
 	var origin_pos = handle_origin.global_transform.origin
 	var handle_pos = global_transform.origin
-	#print(handle_pos.distance_to(origin_pos))
-	 
 	if handle_pos.distance_to(origin_pos) > snap_distance:
 		drop()
 
@@ -66,14 +60,7 @@ func _process(_delta: float) -> void:
 # Called when the handle is picked up
 func pick_up(by) -> void:
 	# Call the base-class to perform the pickup
-	print('Pickikng up handle: ', by)
-	emit_signal('pickedUpSignal')
-	
-	print(grab_distance)
-	#if('Slider' not in get_parent().get_parent().name):
-	var handle_pos = global_transform.origin
-	if handle_pos.distance_to(by.global_position) > grab_distance:
-		return
+	print(by)
 	super(by)
 
 	# Enable the process function while held
@@ -83,7 +70,6 @@ func pick_up(by) -> void:
 # Called when the handle is dropped
 func let_go(by: Node3D, _p_linear_velocity: Vector3, _p_angular_velocity: Vector3) -> void:
 	# Call the base-class to perform the drop, but with no velocity
-	emit_signal('droppedSignal')
 	super(by, Vector3.ZERO, Vector3.ZERO)
 
 	# Disable the process function as no-longer held
