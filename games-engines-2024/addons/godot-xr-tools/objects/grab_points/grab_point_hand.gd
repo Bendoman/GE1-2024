@@ -78,8 +78,10 @@ func _ready():
 
 ## Test if a grabber can grab by this grab-point
 func can_grab(grabber : Node3D, current : XRToolsGrabPoint) -> float:
-	#scale = scale/Global.cube_scale
 	# Skip if not enabled
+	#if("Theremin" in name):
+		#scale = scale*Global.cube_scale
+
 	if not enabled:
 		return 0.0
 

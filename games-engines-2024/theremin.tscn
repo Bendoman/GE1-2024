@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dnluh01o141d4"]
+[gd_scene load_steps=23 format=4 uid="uid://dnluh01o141d4"]
 
 [ext_resource type="Script" path="res://theremin.gd" id="1_mqdv8"]
 [ext_resource type="Script" path="res://addons/godot_sfxr/SfxrStreamPlayer3D.gd" id="1_xsb8r"]
@@ -8,9 +8,10 @@
 [ext_resource type="Material" uid="uid://cb0w5x35j58nv" path="res://materials/theremin_handle.tres" id="5_kyiwd"]
 [ext_resource type="PackedScene" uid="uid://bddj5m7ull6g0" path="res://addons/godot-xr-tools/interactables/interactable_handle.tscn" id="6_hukli"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="7_1j24s"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/grab_points/theremin_grab_point_hand_left.gd" id="7_c8y8c"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="8_ibwva"]
-[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="9_wmlu6"]
+[ext_resource type="Animation" uid="uid://dhjb0e334tfwl" path="res://addons/godot-xr-tools/hands/animations/left/Pinch Flat.res" id="9_2elc2"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="10_hmbpt"]
+[ext_resource type="Animation" uid="uid://dg4v7rqiaje2h" path="res://addons/godot-xr-tools/hands/animations/right/Pinch Flat.res" id="11_4ieqt"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_fa51h"]
 data = PackedByteArray("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")
@@ -40,6 +41,16 @@ size = Vector3(0.1, 0.05, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qquej"]
 size = Vector3(0.1, 0.05, 0.2)
+
+[sub_resource type="Resource" id="Resource_irq2i"]
+script = ExtResource("10_hmbpt")
+open_pose = ExtResource("9_2elc2")
+closed_pose = ExtResource("9_2elc2")
+
+[sub_resource type="Resource" id="Resource_geuau"]
+script = ExtResource("10_hmbpt")
+open_pose = ExtResource("11_4ieqt")
+closed_pose = ExtResource("11_4ieqt")
 
 [node name="theremin" type="Node3D"]
 script = ExtResource("1_mqdv8")
@@ -113,24 +124,18 @@ shape = SubResource("BoxShape3D_ouwtk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 mesh = SubResource("BoxMesh_kwsv8")
 
-[node name="GrabPointHandLeft" parent="SliderOrigin/InteractableSlider/SliderBody/handleMesh" instance=ExtResource("7_1j24s")]
-script = ExtResource("7_c8y8c")
-
-[node name="GrabPointHandRight" parent="SliderOrigin/InteractableSlider/SliderBody/handleMesh" instance=ExtResource("8_ibwva")]
-script = ExtResource("7_c8y8c")
-
 [node name="handleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="InteractableHandle" parent="SliderOrigin/InteractableSlider/handleOrigin" instance=ExtResource("6_hukli")]
 collision_layer = 393216
-grab_distance = 0.1
+grab_distance = 0.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/handleOrigin/InteractableHandle"]
 shape = SubResource("BoxShape3D_qquej")
 
-[node name="GrabPointRedirectLeft" parent="SliderOrigin/InteractableSlider/handleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("9_wmlu6")]
-target = NodePath("../../../SliderBody/handleMesh/GrabPointHandLeft")
+[node name="GrabPointHandLeft" parent="SliderOrigin/InteractableSlider/handleOrigin/InteractableHandle" instance=ExtResource("7_1j24s")]
+hand_pose = SubResource("Resource_irq2i")
 
-[node name="GrabPointRedirectRight" parent="SliderOrigin/InteractableSlider/handleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("9_wmlu6")]
-target = NodePath("../../../SliderBody/handleMesh/GrabPointHandRight")
+[node name="GrabPointHandRight" parent="SliderOrigin/InteractableSlider/handleOrigin/InteractableHandle" instance=ExtResource("8_ibwva")]
+hand_pose = SubResource("Resource_geuau")

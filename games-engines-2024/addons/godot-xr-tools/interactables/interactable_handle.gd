@@ -72,6 +72,9 @@ func pick_up(by) -> void:
 	print(grab_distance)
 	#if('Slider' not in get_parent().get_parent().name):
 	var handle_pos = global_transform.origin
+	print(handle_pos)
+	print(by.global_position)
+	print('dist: ', handle_pos.distance_to(by.global_position))
 	if handle_pos.distance_to(by.global_position) > grab_distance:
 		return
 	super(by)

@@ -3,7 +3,7 @@ extends XROrigin3D
 @onready var control_pad = $ControlPad
 
 func grip_held(): 
-	print('grip held in here')
+	#print('grip held in here')
 	control_pad.get_node("Viewport2Din3D").visible = !control_pad.get_node("Viewport2Din3D").visible
 	pass
 
