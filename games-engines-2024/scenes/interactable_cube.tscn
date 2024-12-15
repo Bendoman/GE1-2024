@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvsrygsjaqq7e"]
+[gd_scene load_steps=18 format=3 uid="uid://dvsrygsjaqq7e"]
 
 [ext_resource type="Script" path="res://scripts/interactable_rotation_planes.gd" id="1_k4ukj"]
 [ext_resource type="Script" path="res://scripts/interactable_cube.gd" id="1_np1tr"]
@@ -11,11 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://c2i58b3m6fkf0" path="res://scenes/interactable_rotation_plane.tscn" id="9_2xpmb"]
 [ext_resource type="PackedScene" uid="uid://t3b47lj1rvy7" path="res://scenes/cubelet.tscn" id="9_sqj7i"]
 [ext_resource type="AudioStream" uid="uid://bkopjif5xdw8h" path="res://sounds/click.mp3" id="11_7g8qv"]
+[ext_resource type="PackedScene" uid="uid://xwgcjt6sgtgv" path="res://scenes/switch.tscn" id="11_b33ay"]
 [ext_resource type="PackedScene" uid="uid://k7jxtfi4j4kd" path="res://scenes/beat_pad.tscn" id="11_rkwiu"]
 [ext_resource type="Script" path="res://scenes/hitzone.gd" id="13_ldtd0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l7gtp"]
-size = Vector3(3.101, 1.001, 3.101)
+size = Vector3(2.5, 0.25, 2.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pag4q"]
 transparency = 1
@@ -23,7 +24,7 @@ albedo_color = Color(0.0975999, 0.96, 0.0192, 0.309804)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h5p0a"]
 material = SubResource("StandardMaterial3D_pag4q")
-size = Vector3(3.101, 1.001, 3.101)
+size = Vector3(2.5, 0.25, 2.5)
 
 [node name="interactable_cube" type="Node3D"]
 script = ExtResource("1_np1tr")
@@ -147,6 +148,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -1.05)
 [node name="Cubelet25" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0, -2.1)
 
+[node name="switch" parent="cublets/Top row/Cubelet25" node_paths=PackedStringArray("hitzone") instance=ExtResource("11_b33ay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+hitzone = NodePath("../../../../hitzone")
+
 [node name="Cubelet26" parent="cublets/Top row" instance=ExtResource("9_sqj7i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1)
 
@@ -161,7 +166,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1, 0, -2.1)
 stream = ExtResource("11_7g8qv")
 
 [node name="hitzone" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01, 2.77231, -1.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.025, 2.699, -1.025)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("13_ldtd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitzone"]

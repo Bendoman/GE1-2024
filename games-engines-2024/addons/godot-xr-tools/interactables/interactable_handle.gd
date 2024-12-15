@@ -2,6 +2,8 @@
 class_name XRToolsInteractableHandle
 extends XRToolsPickable
 
+signal pickedUpSignal
+signal droppedSignal
 
 ## XR Tools Interactable Handle script
 ##
@@ -65,6 +67,7 @@ func _process(_delta: float) -> void:
 func pick_up(by) -> void:
 	# Call the base-class to perform the pickup
 	print(by)
+	emit_signal('pickedUpSignal')
 	var handle_pos = global_transform.origin
 	if handle_pos.distance_to(by.global_position) > grab_distance:
 		return
@@ -78,6 +81,7 @@ func pick_up(by) -> void:
 # Called when the handle is dropped
 func let_go(by: Node3D, _p_linear_velocity: Vector3, _p_angular_velocity: Vector3) -> void:
 	# Call the base-class to perform the drop, but with no velocity
+	emit_signal('droppedSignal')
 	super(by, Vector3.ZERO, Vector3.ZERO)
 
 	# Disable the process function as no-longer held

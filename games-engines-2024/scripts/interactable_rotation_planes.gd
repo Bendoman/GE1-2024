@@ -62,7 +62,8 @@ func onDeselect(area: Area3D):
 	for node in area.get_overlapping_bodies():
 		if('Cubelet' in node.name):
 			continue
-		node.get_node('../InteractableAreaButton').emit_signal('deselectSignal')
+		#node.get_node('../InteractableAreaButton').emit_signal('deselectSignal')
+	hitzone.collision_layer = 2
 
 func onPlaySnapSound():
 	audioPlayer.play()
@@ -82,13 +83,12 @@ func swap_highlighted_plane_new(plane_nodes):
 	var rotationArea = plane_nodes[0]
 	for node in rotationArea.get_overlapping_bodies():
 		if('Cubelet' not in node.name):
-			node.get_node('../InteractableAreaButton').emit_signal('selectSignal')
+			#node.get_node('../InteractableAreaButton').emit_signal('selectSignal')
 			continue
 		var old_transform = node.global_transform
 		node.get_parent().remove_child(node)
 		plane_nodes[1].add_child(node)
 		node.global_transform = old_transform
-		hitzone.collision_layer = 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

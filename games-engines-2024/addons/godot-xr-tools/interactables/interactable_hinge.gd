@@ -225,12 +225,12 @@ func _physics_process(delta: float) -> void:
 			previousOffset = 0
 
 			var hingePos = hinge_position
-			print('OG Hinge pos: ', hingePos)
+			#print('OG Hinge pos: ', hingePos)
 			while(hingePos < 0):
 				hingePos += 360
 			while(hingePos > 360):
 				hingePos -= 360
-			print('Corrected Hinge pos: ', hingePos)
+			#print('Corrected Hinge pos: ', hingePos)
 			
 			#if(hingePos < 0):
 				#hingePos = 360 + hingePos
@@ -238,16 +238,16 @@ func _physics_process(delta: float) -> void:
 			
 			var closest = 0
 			var closest_distance = abs(snapAngles[0] - hingePos)
-			print('Closest distance: ', closest_distance)
+			#print('Closest distance: ', closest_distance)
 			
 			for i in range(1, len(snapAngles)):
 				var distance = abs(snapAngles[i] - hingePos)
-				print('Distance distance: ', distance)
+				#print('Distance distance: ', distance)
 				if(distance < closest_distance):
 					closest_distance = distance
 					closest = snapAngles[i]
-					print('New closest distance: ', closest_distance)
-					print('New closest angle: ', closest)
+					#print('New closest distance: ', closest_distance)
+					#print('New closest angle: ', closest)
 					
 			if(closest == 360):
 				closest = 0

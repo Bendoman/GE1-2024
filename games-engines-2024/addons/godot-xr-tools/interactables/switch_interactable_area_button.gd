@@ -1,5 +1,4 @@
-@tool
-class_name XRToolsInteractableAreaButton
+class_name SwitchXRToolsInteractableAreaButton
 extends Area3D
 
 
@@ -18,6 +17,8 @@ signal button_released(button)
 
 signal selectSignal
 signal deselectSignal
+
+signal hitSignal
 
 ## Button object
 @export var button := NodePath()
@@ -86,7 +87,7 @@ func onPress(button):
 	#print(hitzone.get_overlapping_bodies())
 	#print(get_node("../button") in hitzone.get_overlapping_bodies())
 	if(get_node("../button") in hitzone.get_overlapping_bodies()):
-		pad_sound.play()
+		emit_signal("hitSignal")
 
 func onRelease(button):
 	#print('released')

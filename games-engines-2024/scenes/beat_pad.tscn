@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://k7jxtfi4j4kd"]
+[gd_scene load_steps=17 format=3 uid="uid://k7jxtfi4j4kd"]
 
 [ext_resource type="Script" path="res://scenes/beat_pad.gd" id="1_rm7xu"]
 [ext_resource type="Material" uid="uid://c53c0dahi1eg2" path="res://materials/pad_button.tres" id="2_rtjqq"]
 [ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="3_rkwm8"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="4_8pyi2"]
 [ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="5_xnrjh"]
+[ext_resource type="PackedScene" uid="uid://dc5t2qgmhb2nf" path="res://addons/godot-xr-tools/objects/hand_pose_area.tscn" id="7_p7rxy"]
+[ext_resource type="Animation" uid="uid://plad1r85f7ws" path="res://addons/godot-xr-tools/hands/animations/left/Grip.res" id="8_6cf3a"]
 [ext_resource type="AudioStream" uid="uid://csgc37s07uxp4" path="res://sounds/kick_sound_1.mp3" id="9_3ykaa"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="9_16aha"]
+[ext_resource type="Animation" uid="uid://ccds2u22gbxn7" path="res://addons/godot-xr-tools/hands/animations/right/Grip.res" id="10_q3g1f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_imq88"]
 size = Vector3(0.65, 0.05, 0.65)
@@ -17,10 +21,25 @@ size = Vector3(0.65, 0.05, 0.65)
 [sub_resource type="BoxShape3D" id="BoxShape3D_uuap0"]
 size = Vector3(0.65, 0.05, 0.65)
 
+[sub_resource type="Resource" id="Resource_dsoab"]
+script = ExtResource("9_16aha")
+open_pose = ExtResource("8_6cf3a")
+closed_pose = ExtResource("8_6cf3a")
+
+[sub_resource type="Resource" id="Resource_tnbpq"]
+script = ExtResource("9_16aha")
+open_pose = ExtResource("10_q3g1f")
+closed_pose = ExtResource("10_q3g1f")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fv62a"]
+size = Vector3(0.65, 1, 0.65)
+
 [node name="beatPad" type="Node3D"]
 script = ExtResource("1_rm7xu")
 
 [node name="button" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="button"]
 shape = SubResource("BoxShape3D_imq88")
@@ -43,3 +62,10 @@ shape = SubResource("BoxShape3D_uuap0")
 stream = ExtResource("9_3ykaa")
 volume_db = -10.0
 bus = &"effects_bus"
+
+[node name="HandPoseArea" parent="." instance=ExtResource("7_p7rxy")]
+left_pose = SubResource("Resource_dsoab")
+right_pose = SubResource("Resource_tnbpq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+shape = SubResource("BoxShape3D_fv62a")

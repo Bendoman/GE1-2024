@@ -63,6 +63,8 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 light_color = Color(1, 1, 0.898039, 1)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_fuouj")
@@ -83,4 +85,4 @@ mesh = SubResource("BoxMesh_mt4iv")
 shape = SubResource("BoxShape3D_dn2wk")
 
 [node name="interactable_cube" parent="." instance=ExtResource("4_g8btw")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.517883, 1.3302, 0.13825)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.337229, 1.3302, 0.565274)
