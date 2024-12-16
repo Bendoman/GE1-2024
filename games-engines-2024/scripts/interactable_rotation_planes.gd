@@ -58,7 +58,7 @@ func onDeselect(area: Area3D):
 			continue
 	hitzone.collision_layer = 2
 	await get_tree().create_timer(0.05).timeout
-	print(hitzone.get_overlapping_bodies())
+	#print(hitzone.get_overlapping_bodies())
 	
 #	Reset all effects here
 	#while AudioServer.get_bus_effect_count(effects_bus_index) > 0:

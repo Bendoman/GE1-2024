@@ -22,8 +22,6 @@ func _process(delta: float) -> void:
 	pass
 
 func on_left_ax_click(): 
-	click_sound.play()
-	print('Should be playing')
 	emit_signal("left_ax_button_pressed")
 func on_left_by_click(): 
 	emit_signal("left_by_button_pressed")
