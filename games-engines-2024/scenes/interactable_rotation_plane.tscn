@@ -63,31 +63,31 @@ mesh = SubResource("BoxMesh_5g1g2")
 shape = SubResource("BoxShape3D_ou5fh")
 
 [node name="handleShape" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.525, 1.525)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.825, 1.825)
 mesh = SubResource("SphereMesh_ar04i")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_crlx0")
 
 [node name="handleShape2" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.525, -1.525)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.825, -1.825)
 mesh = SubResource("SphereMesh_phos2")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_crlx0")
 
 [node name="handleShape3" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.525, 1.525)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.825, 1.825)
 mesh = SubResource("SphereMesh_cxknq")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_crlx0")
 
 [node name="handleShape4" type="MeshInstance3D" parent="hingeOrigin/InteractableHinge/rotation_plane_body"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.525, -1.525)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.825, -1.825)
 mesh = SubResource("SphereMesh_vbxxy")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_crlx0")
 
 [node name="handleContainer" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 1.525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, 1.825)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer"]
 
@@ -109,7 +109,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.044
 hand_pose = SubResource("Resource_tmc55")
 
 [node name="handleContainer2" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, -1.525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, -1.825)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer2"]
 
@@ -131,7 +131,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.044
 hand_pose = SubResource("Resource_tmc55")
 
 [node name="handleContainer3" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.525, 1.525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.825, 1.825)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer3"]
 
@@ -153,7 +153,7 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.044
 hand_pose = SubResource("Resource_tmc55")
 
 [node name="handleContainer4" type="Node3D" parent="hingeOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.525, -1.525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.825, -1.825)
 
 [node name="handle1" type="Node3D" parent="hingeOrigin/InteractableHinge/handleContainer4"]
 

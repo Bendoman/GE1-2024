@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://dnluh01o141d4"]
+[gd_scene load_steps=23 format=3 uid="uid://dnluh01o141d4"]
 
-[ext_resource type="Script" path="res://theremin.gd" id="1_mqdv8"]
+[ext_resource type="Script" path="res://scripts/theremin.gd" id="1_mqdv8"]
 [ext_resource type="Script" path="res://addons/godot_sfxr/SfxrStreamPlayer3D.gd" id="1_xsb8r"]
 [ext_resource type="Material" uid="uid://dmgvoay33kbyo" path="res://materials/theremin_base.tres" id="3_fym58"]
 [ext_resource type="PackedScene" uid="uid://b0r6edl74ddo7" path="res://addons/godot-xr-tools/interactables/interactable_slider.tscn" id="4_83f55"]
@@ -13,19 +13,16 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="10_hmbpt"]
 [ext_resource type="Animation" uid="uid://dg4v7rqiaje2h" path="res://addons/godot-xr-tools/hands/animations/right/Pinch Flat.res" id="11_4ieqt"]
 
-[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_fa51h"]
-data = PackedByteArray("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")
-loop_mode = 1
-loop_end = 15
-mix_rate = 2200
-
 [sub_resource type="BoxMesh" id="BoxMesh_v0p61"]
 size = Vector3(0.65, 0.05, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vfdja"]
 size = Vector3(0.65, 0.05, 0.03)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vacex"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_eah22"]
+material = SubResource("StandardMaterial3D_vacex")
 size = Vector3(0.16, 0.1, 0.005)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x6i4r"]
@@ -56,11 +53,10 @@ closed_pose = ExtResource("11_4ieqt")
 script = ExtResource("1_mqdv8")
 
 [node name="SfxrStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamWAV_fa51h")
 volume_db = -30.0
 bus = &"theremin_effects"
 script = ExtResource("1_xsb8r")
-wave/type = 2
+wave/type = 1
 sample_params/sound_vol = 0.25
 sample_params/sample_rate = 22050.0
 envelope/attack_time = 0.0
@@ -110,7 +106,6 @@ skeleton = NodePath("../../SliderOrigin/InteractableSlider/SliderBody")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198172, 0, 0)
 
 [node name="InteractableSlider" parent="SliderOrigin" instance=ExtResource("4_83f55")]
-cube_scale = null
 slider_limit_max = 0.45
 slider_steps = 0.05
 

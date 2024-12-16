@@ -28,7 +28,7 @@ signal deselectSignal
 ## Displacement duration
 @export var duration : float = 0.1
 
-@onready var hitzone: Area3D = get_node("..").hitzone
+#@onready var hitzone: Area3D = get_node("..").hitzone
 
 ## If true, the button is pressed
 var pressed : bool = false
@@ -51,6 +51,10 @@ var _tween: Tween
 # Add support for is_xr_class on XRTools classes
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsInteractableAreaButton"
+
+@onready var button_mesh = $"../button/MeshInstance3D"
+const PAD_BUTTON = preload("res://materials/pad_button.tres")
+const PAD_PRESSED = preload("res://materials/pad_pressed.tres")
 
 @onready var pad_sound = $"../pad_sound"
 
@@ -81,17 +85,11 @@ func onDeselect():
 	selected = false
 
 func onPress(button):
-	#emit_signal('play_sound', 'kick')
-	#print('pressed')
-	#print(hitzone.get_overlapping_bodies())
-	#print(get_node("../button") in hitzone.get_overlapping_bodies())
-	#if(get_node("../button") in hitzone.get_overlapping_bodies()):
-		#pad_sound.play()
+	button_mesh.set_surface_override_material(0, PAD_PRESSED)
 	pad_sound.play()
 
 func onRelease(button):
-	#print('released')
-	pass
+	button_mesh.set_surface_override_material(0, PAD_BUTTON)
 
 # Called when an area or body enters the button area
 #TODO: Come back tot his

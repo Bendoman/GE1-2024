@@ -58,10 +58,10 @@ var previousBasis
 @onready var _hinge_position_rad : float = deg_to_rad(hinge_position)
 @onready var _default_position_rad : float = deg_to_rad(default_position)
 
-
 # Add support for is_xr_class on XRTools classes
 func is_xr_class(name : String) -> bool:
 	return name == "XRToolsInteractableHinge" or super(name)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,7 +70,6 @@ func _ready():
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, handleMaterial)
-	# In Godot 4 we must now manually call our super class ready function
 	super()
 
 	# Set the initial position to match the initial hinge position value
@@ -85,7 +84,8 @@ func _ready():
 		push_error("Cannot connect hinge released signal")
 	connect('selectableSignal', self.setSelectable)
 	connect('unselectableSignal', self.setUnselectable)
-#
+
+
 func setSelectable():
 	#print('selectable')
 	for node in get_node('rotation_plane_body').get_children():
@@ -96,11 +96,10 @@ func setSelectable():
 #	TODO: Find root cause of this bug instead of this workaround if there's time
 	await get_tree().create_timer(0.05).timeout
 	selectable = true
-	
+
+
 func setUnselectable():
-	#print('unselectable')
 	selectable = false
-#	TODO: See why this isn't working
 	if(selected):
 		return
 		
@@ -108,8 +107,9 @@ func setUnselectable():
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, transparentMaterial)
-	
-	
+		print('setting transparent')
+
+
 var previousOffset = 0
 # Called every frame when one or more handles are held by the player
 func _process(_delta: float) -> void:
@@ -123,11 +123,9 @@ func _process(_delta: float) -> void:
 			get_node("rotation_plane_body/body_mesh"),
 			get_parent().get_parent()
 		]
-		emit_signal('onSelectSignal', emit_nodes)
 		selected = true
-	#if not selected:
-		#return
-		
+		emit_signal('onSelectSignal', emit_nodes)
+	
 	# Get the total handle angular offsets
 	var offset_sum := 0.0
 	for item in grabbed_handles:
@@ -151,11 +149,11 @@ func move_hinge(position: float) -> void:
 	position = _do_move_hinge(position)
 	if position == _hinge_position_rad:
 		return
-
+		
 	# Update the current positon
 	_hinge_position_rad = position
 	hinge_position = rad_to_deg(position)
-
+	
 	# Emit the moved signal
 	emit_signal("hinge_moved", hinge_position)
 
@@ -195,50 +193,39 @@ func _set_default_position(value: float) -> void:
 	default_position = value
 	_default_position_rad = deg_to_rad(value)
 
+
 # Do the hinge move
 func _do_move_hinge(position: float) -> float:
 	# Apply hinge step-quantization
 	if _hinge_steps_rad:
 		position = round(position / _hinge_steps_rad) * _hinge_steps_rad
-
-	# Apply hinge limits
-	#position = clamp(position, _hinge_limit_min_rad, _hinge_limit_max_rad)
-
 	# Move if necessary
 	if position != _hinge_position_rad:
 		transform.basis = Basis.from_euler(Vector3(position, 0.0, 0.0))
 	# Return the updated position
 	return position
 
+
 var snapAngles = [0, 90, 180, 270, 360]
 var audioSnapAngles = [0, 90, -90, 180, -180]
 func _physics_process(delta: float) -> void:
-#	TODO: Play snap sound on rotation
 	if(grabbed_handles.size() == 0):
 		move_hinge(_hinge_position_rad + previousOffset)
 		if(previousOffset < 0):
 			previousOffset += abs(previousOffset) / 100
 		elif(previousOffset > 0):
 			previousOffset -= abs(previousOffset) / 100			
-
-		if(previousOffset != 0 and abs(0 - previousOffset) <= 0.005):
+		
+		if(previousOffset != 0 and abs(0 - previousOffset) <= 0.008):
 			previousOffset = 0
-
 			var hingePos = hinge_position
-			#print('OG Hinge pos: ', hingePos)
 			while(hingePos < 0):
 				hingePos += 360
 			while(hingePos > 360):
 				hingePos -= 360
-			#print('Corrected Hinge pos: ', hingePos)
-			
-			#if(hingePos < 0):
-				#hingePos = 360 + hingePos
-				#print('Corrected Hinge pos: ', hingePos)
 			
 			var closest = 0
 			var closest_distance = abs(snapAngles[0] - hingePos)
-			#print('Closest distance: ', closest_distance)
 			
 			for i in range(1, len(snapAngles)):
 				var distance = abs(snapAngles[i] - hingePos)
@@ -246,15 +233,12 @@ func _physics_process(delta: float) -> void:
 				if(distance < closest_distance):
 					closest_distance = distance
 					closest = snapAngles[i]
-					#print('New closest distance: ', closest_distance)
-					#print('New closest angle: ', closest)
-					
+			
 			if(closest == 360):
 				closest = 0
-			#print('Closest angle: ', closest)		
+			
 			emit_signal("playSnapSound")
 			_set_hinge_position(closest)
 			
 			emit_signal("onDeselectSignal", get_node("rotation_plane_body/body_mesh/RotationArea"))
 			selected = false
-#			TODO Play snapping sound effect

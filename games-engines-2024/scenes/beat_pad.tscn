@@ -1,6 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://k7jxtfi4j4kd"]
+[gd_scene load_steps=18 format=3 uid="uid://k7jxtfi4j4kd"]
 
-[ext_resource type="Script" path="res://scenes/beat_pad.gd" id="1_rm7xu"]
+[ext_resource type="Script" path="res://scripts/beat_pad.gd" id="1_rm7xu"]
 [ext_resource type="Material" uid="uid://c53c0dahi1eg2" path="res://materials/pad_button.tres" id="2_rtjqq"]
 [ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="3_rkwm8"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="4_8pyi2"]
@@ -33,6 +33,14 @@ closed_pose = ExtResource("10_q3g1f")
 [sub_resource type="BoxShape3D" id="BoxShape3D_fv62a"]
 size = Vector3(0.65, 1, 0.65)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kysb4"]
+transparency = 1
+albedo_color = Color(0.87, 0.4611, 0.4611, 0.352941)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i6re2"]
+material = SubResource("StandardMaterial3D_kysb4")
+size = Vector3(0.65, 1, 0.65)
+
 [node name="beatPad" type="Node3D"]
 script = ExtResource("1_rm7xu")
 
@@ -58,7 +66,7 @@ event = ExtResource("5_xnrjh")
 shape = SubResource("BoxShape3D_uuap0")
 
 [node name="pad_sound" type="AudioStreamPlayer3D" parent="."]
-volume_db = -10.0
+volume_db = -20.0
 bus = &"effects_bus"
 
 [node name="HandPoseArea" parent="." instance=ExtResource("7_p7rxy")]
@@ -66,4 +74,10 @@ left_pose = SubResource("Resource_dsoab")
 right_pose = SubResource("Resource_tnbpq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_fv62a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HandPoseArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_i6re2")
