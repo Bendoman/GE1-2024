@@ -107,7 +107,7 @@ func setUnselectable():
 		if('handle' not in node.name):
 			continue
 		node.set_surface_override_material(0, transparentMaterial)
-		print('setting transparent')
+		#print('setting transparent')
 
 
 var previousOffset = 0

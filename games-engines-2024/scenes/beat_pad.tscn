@@ -31,7 +31,7 @@ open_pose = ExtResource("10_q3g1f")
 closed_pose = ExtResource("10_q3g1f")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fv62a"]
-size = Vector3(0.65, 1, 0.65)
+size = Vector3(0.65, 0.25, 0.65)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kysb4"]
 transparency = 1
@@ -74,7 +74,7 @@ left_pose = SubResource("Resource_dsoab")
 right_pose = SubResource("Resource_tnbpq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HandPoseArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("BoxShape3D_fv62a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HandPoseArea"]

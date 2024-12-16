@@ -66,15 +66,15 @@ func _process(_delta: float) -> void:
 # Called when the handle is picked up
 func pick_up(by) -> void:
 	# Call the base-class to perform the pickup
-	print('Pickikng up handle: ', by)
+	#print('Pickikng up handle: ', by)
 	emit_signal('pickedUpSignal')
 	
-	print(grab_distance)
+	#print(grab_distance)
 	#if('Slider' not in get_parent().get_parent().name):
 	var handle_pos = global_transform.origin
-	print(handle_pos)
-	print(by.global_position)
-	print('dist: ', handle_pos.distance_to(by.global_position))
+	#print(handle_pos)
+	#print(by.global_position)
+	#print('dist: ', handle_pos.distance_to(by.global_position))
 	if handle_pos.distance_to(by.global_position) > grab_distance:
 		return
 	super(by)

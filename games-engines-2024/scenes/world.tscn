@@ -49,10 +49,10 @@ mesh = SubResource("BoxMesh_16tix")
 [node name="XROrigin3D" parent="." instance=ExtResource("2_qpxi4")]
 
 [node name="PickableObject" parent="." instance=ExtResource("4_kn8jo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.840667, 1.52525, 0.340174)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.840667, 1.41734, 0.340174)
 collision_mask = 0
 freeze_mode = 0
 release_mode = 1
 
 [node name="interactable_cube" parent="PickableObject" instance=ExtResource("4_g8btw")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.4, -0.495, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.21, -0.459, -0.55)
