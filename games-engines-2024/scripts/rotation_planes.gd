@@ -93,7 +93,6 @@ func _input(event):
 		swap_highlighted_plane(face_planes, face_plane_index)
 		highlighted_plane_type = 'FACE'
 		
-		
 	if(Input.is_action_just_pressed("turn_clockwise")):
 		if(!tweening):
 			tween_rotation(90)
@@ -104,8 +103,6 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#highlighted_plane.rotate_y(0.1 * delta)
-	#print(highlighted_plane.global_basis)
 	if(highlighted_plane == null):
 		highlighted_plane = get_node(horizontal_planes[0])
 		swap_highlighted_plane(horizontal_planes, 0)

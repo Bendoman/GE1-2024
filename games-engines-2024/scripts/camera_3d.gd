@@ -10,10 +10,8 @@ var verticalRotationAxis:float
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	translate(Vector3(0, 0, translationSpeed * delta * translationAxis))
 	get_parent().rotate_y(deg_to_rad(rotationSpeed) * delta * rotationAxis)
 	get_parent().rotate_x(deg_to_rad(rotationSpeed) * delta * verticalRotationAxis)

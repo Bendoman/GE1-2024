@@ -92,22 +92,12 @@ func onRelease(button):
 	button_mesh.set_surface_override_material(0, PAD_BUTTON)
 
 # Called when an area or body enters the button area
-#TODO: Come back tot his
 #var locked: bool = false
 func _on_button_entered(item: Node3D) -> void:
-	#print(item)
 	# Add to the dictionary of trigger items
 	_trigger_items[item] = item
 	# Detect transition to pressed
 	if !pressed:
-		#var handle_pos = global_transform.origin
-		#var dist = item.global_position.y - global_position.y
-		#print(dist)
-		#if dist < 0:
-			#locked = true
-			#print('locking')
-			#return
-			
 		# Update state to pressed
 		pressed = true
 
@@ -128,11 +118,6 @@ func _on_button_entered(item: Node3D) -> void:
 func _on_button_exited(item: Node3D) -> void:
 	# Remove from the dictionary of triggered items
 	_trigger_items.erase(item)
-	
-	#if(locked and _trigger_items.is_empty()):
-		#locked = false
-		#print('unlocking')
-
 	# Detect transition to released
 	if pressed and _trigger_items.is_empty():
 		# Update state to released

@@ -22,7 +22,7 @@ func onDeactivate():
 	sfxr_stream_player_3d.stop()	
 
 func sliderMoved(position):		
-	print('slider moved: ', sfxr_stream_player_3d)
+	#print('slider moved: ', sfxr_stream_player_3d)
 	if(position == 0):
 		handle_mesh.set_surface_override_material(0, THEREMIN_HANDLE)
 		sfxr_stream_player_3d.stop()
@@ -32,7 +32,7 @@ func sliderMoved(position):
 	 
 	var output = remap(position, 0, 0.45, 600, 2200)
 	sfxr_stream_player_3d.stream.mix_rate = output
-	print(output)
+	#print(output)
 
 func onPointer(event):
 	print('pointer event: ', event)

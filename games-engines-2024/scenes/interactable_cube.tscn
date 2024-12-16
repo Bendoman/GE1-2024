@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dvsrygsjaqq7e"]
+[gd_scene load_steps=69 format=3 uid="uid://dvsrygsjaqq7e"]
 
 [ext_resource type="Script" path="res://scripts/interactable_rotation_planes.gd" id="1_k4ukj"]
 [ext_resource type="Script" path="res://scripts/interactable_cube.gd" id="1_np1tr"]
@@ -30,7 +30,6 @@
 [ext_resource type="AudioStream" uid="uid://dbaxm8riwinwr" path="res://sounds/mpc/beat1.mp3" id="16_m1cy3"]
 [ext_resource type="AudioStream" uid="uid://bj8vcscgrn3mm" path="res://sounds/kick8.mp3" id="17_xy2l2"]
 [ext_resource type="AudioStream" uid="uid://kuv0sr3wbgtg" path="res://sounds/mpc/tone1.mp3" id="18_eopfk"]
-[ext_resource type="AudioStream" path="res://sounds/snare6.mp3" id="19_bg835"]
 [ext_resource type="AudioStream" uid="uid://c8ixyvt81jdo8" path="res://sounds/mpc/beep1.mp3" id="19_lgxiu"]
 [ext_resource type="AudioStream" uid="uid://deqr5pempk0vr" path="res://sounds/mpc/beep3.mp3" id="20_wq4h3"]
 [ext_resource type="AudioStream" uid="uid://lpb83qn0jirw" path="res://sounds/mpc/hihat3.mp3" id="21_hxfuh"]
@@ -245,7 +244,7 @@ hitsound = ExtResource("14_uco0j")
 
 [node name="beatPad2" parent="cublets/Bottom row/Cubelet9" instance=ExtResource("11_rkwiu")]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.5, 0, 0)
-hitsound = ExtResource("19_bg835")
+hitsound = ExtResource("25_8mcsb")
 
 [node name="beatPad3" parent="cublets/Bottom row/Cubelet9" instance=ExtResource("11_rkwiu")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, -0.5, 0)
