@@ -5,7 +5,7 @@ Name: Ben Corran
 Student Number: C21430484
 
 (https://www.youtube.com/watch?v=FtxhKLheXAk)
-![Youtube](image-1.png)
+[![Youtube](image-1.png)](https://youtu.be/FtxhKLheXAk)
 
 # Description of the project
 This project consists of a fully interactable Rubiks Cube that takes the form of a musical sample pad. 
